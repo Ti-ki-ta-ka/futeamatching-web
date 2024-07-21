@@ -12,3 +12,14 @@ export const login = async (loginRequest) => {
   }
   return response.data;
 };
+
+export const signUp = async(signUpRequest) => {
+  const response = await client.post("/users/sign-up", signUpRequest);
+
+  if (response.status === 201) {
+    console.log('회원가입 성공 : ', response.data);
+  } else {
+    console.log('회원가입 실패 : ', response.data);
+  }
+  return response.data
+}
