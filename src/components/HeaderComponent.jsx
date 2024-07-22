@@ -1,11 +1,13 @@
 // HeaderComponent.jsx
 import React from 'react';
 import { Group, Text, Button, ActionIcon, TextInput, Box } from '@mantine/core';
-import { IconSearch, IconAdjustments, IconMenu2 } from '@tabler/icons-react';
+import { IconSearch, IconMenu2 } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../AuthContext'; 
 
 const HeaderComponent = () => {
   const navigate = useNavigate();
+  const { isAuthenticated, logout } = useAuth();
 
   return (
     <Box
@@ -16,7 +18,7 @@ const HeaderComponent = () => {
         marginTop: theme.spacing.md,
       })}
     >
-      <Group justify='space-between' mt="md">
+      <Group justify="space-between" mt="md">
         <Group spacing="xs">
           <ActionIcon variant="default" size="lg">
             <IconMenu2 />
@@ -36,26 +38,39 @@ const HeaderComponent = () => {
             sx={{ width: 600 }}
             styles={{ rightSection: { pointerEvents: 'none' } }}
           />
-          <Button
-            variant="outline"
-            color="gray"
-            radius="xl"
-            size="md"
-            onClick={() => navigate('/login')}
-          >
-            로그인
-          </Button>
-          <Button
-            color="green"
-            radius="xl"
-            size="md"
-            onClick={() => navigate('/signup')}
-          >
-            회원가입
-          </Button>
+          {isAuthenticated ? (
+            <Button
+              variant="outline"
+              color="gray"
+              radius="xl"
+              size="md"
+              onClick={logout}
+            >
+              로그아웃
+            </Button>
+          ) : (
+            <>
+              <Button
+                variant="outline"
+                color="gray"
+                radius="xl"
+                size="md"
+                onClick={() => navigate('/login')}
+              >
+                로그인
+              </Button>
+              <Button
+                color="green"
+                radius="xl"
+                size="md"
+                onClick={() => navigate('/signup')}
+              >
+                회원가입
+              </Button>
+            </>
+          )}
         </Group>
       </Group>
-      {/* 하위 네비게이션 추가 */}
       <Group mt="md" mb="md" spacing="xs">
         <Button variant="outline" color="green" onClick={() => navigate('/')}>매칭하기</Button>
         <Button variant="outline" color="green" onClick={() => navigate('/team')}>팀 구하기</Button>

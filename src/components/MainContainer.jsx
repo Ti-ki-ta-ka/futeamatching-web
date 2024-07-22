@@ -12,9 +12,9 @@ const MainContainer = () => {
 
   const fetchMatches = async (page) => {
     try {
-      const data = await getMatches(page - 1); // 페이지 인덱스는 0부터 시작
+      const data = await getMatches(page - 1); 
       setMatches(data.content);
-      setTotalPages(data.totalPages); // API에서 총 페이지 수를 받아야 합니다
+      setTotalPages(data.totalPages); 
     } catch (error) {
       console.error('Error fetching matches:', error);
     }
