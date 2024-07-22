@@ -3,7 +3,7 @@ import {
   getMatches
 } from "../api/main";
 import MainList from "./MainList";
-import MainHeader from "./MainHeader";
+import HeaderComponent from "./HeaderComponent";
 
 const MainContainer = () => {
   const [matches, setMatches] = useState([]);
@@ -23,7 +23,7 @@ const MainContainer = () => {
 
   return (
     <div style={{ padding: '0 250px' }}>
-      <MainHeader/>
+      <HeaderComponent/>
       <MainList
         matches={matches} 
       />
