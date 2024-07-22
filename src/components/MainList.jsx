@@ -1,34 +1,34 @@
+// MainList.jsx
 import React from 'react';
-import { Button, Card, Group, Text } from '@mantine/core';
+import { Card, Group, Text, Badge, Box } from '@mantine/core';
 
-const MainList = ({ matches}) => {
-  console.log(matches);
-
+const MainList = ({ matches }) => {
   return (
     <>
       {matches.map((match) => (
-        <Card key={match.id} shadow="sm" padding="lg" radius="md" withBorder>
-          <Group justify="space-between" mt="md" mb="xs">
-            <Text fw={500}>
-              {match.title}
+        <Card key={match.id} shadow="sm" padding="lg" radius="md" withBorder mb="md">
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <Group>
+              <Text fw={500} size="lg">
+                {match.title}
+              </Text>
+              <Badge color="green" variant="light">
+                {match.region}
+              </Badge>
+            </Group>
+      
+          </div>
+          <Text size="md">
+            {match.content}
+          </Text>
+          <div style={{ textAlign: 'right' }}>
+            <Text size="sm" color="dimmed">경기 날짜</Text>
+            <Text size="sm" color="dimmed">
+                {new Date(match.matchDate).toLocaleString()}
             </Text>
-            <Text size="sm" c="dimmed">
-              {new Date(match.matchDate).toLocaleString()}
-            </Text>
-          </Group>
-          <Button.Group>
-            <Button variant="light">
-              상세보기
-            </Button>
-            <Button
-              variant="filled"
-            >
-              완료
-            </Button>
-            <Button variant="outline" color="red" >
-              삭제
-            </Button>
-          </Button.Group>
+          </div>
+
+
         </Card>
       ))}
     </>

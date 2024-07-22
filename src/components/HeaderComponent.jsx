@@ -13,9 +13,10 @@ const HeaderComponent = () => {
         backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.white,
         padding: theme.spacing.md,
         borderBottom: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[2]}`,
+        marginTop: theme.spacing.md,
       })}
     >
-      <Group justify='space-between'>
+      <Group justify='space-between' mt="md">
         <Group spacing="xs">
           <ActionIcon variant="default" size="lg">
             <IconMenu2 />
@@ -32,7 +33,7 @@ const HeaderComponent = () => {
             radius="xl"
             size="md"
             rightSectionWidth={90}
-            sx={{ width: 400 }}
+            sx={{ width: 600 }}
             styles={{ rightSection: { pointerEvents: 'none' } }}
           />
           <Button
@@ -53,6 +54,11 @@ const HeaderComponent = () => {
             회원가입
           </Button>
         </Group>
+      </Group>
+      {/* 하위 네비게이션 추가 */}
+      <Group mt="md" mb="md" spacing="xs">
+        <Button variant="outline" color="green" onClick={() => navigate('/')}>매칭하기</Button>
+        <Button variant="outline" color="green" onClick={() => navigate('/team')}>팀 구하기</Button>
       </Group>
     </Box>
   );

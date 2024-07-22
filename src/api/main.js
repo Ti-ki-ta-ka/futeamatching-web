@@ -1,13 +1,13 @@
 import { client } from "./client";
 
-export const getMatches = async () => {
-    const response = await client.get('/matches', {
-      params: {
-        page: 0,
-        size: 10,
-        sort: 'createdAt,desc'
-      }
-    });
-  
-    return response.data;
-  };
+export const getMatches = async (page) => {
+  const response = await client.get('/matches', {
+    params: {
+      page: page,
+      size: 5,
+      sort: 'createdAt,desc',
+    },
+  });
+
+  return response.data;
+};
