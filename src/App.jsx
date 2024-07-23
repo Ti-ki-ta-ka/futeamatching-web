@@ -6,6 +6,7 @@ import MainPage from "./pages/MainPage";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import ModifyProfilePage from './pages/ModifyProfilePage';
+import ModifyPasswordPage from './pages/ModifyPasswordPage';
 import { AuthProvider } from './AuthContext'; 
 import "@mantine/core/styles.css";
 
@@ -20,6 +21,7 @@ const App = () => {
             <Route path="/main" element={<MainPage />} />
             <Route path="/signup" element={<SignUpPage />} />
             <Route path="/profile" element={<ModifyProfilePage />} />
+            <Route path="/password" element={<ModifyPasswordPage />} />
           </Routes>
         </Router>
       </AuthProvider>
