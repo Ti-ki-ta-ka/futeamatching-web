@@ -103,7 +103,7 @@ const HeaderComponent = () => {
             variant="subtle" 
             color="green"
             leftIcon={<IconUsers size={20} />} 
-            onClick={() => navigate('/login')}
+            onClick={() => navigate('/profile')}
           >
             프로필 변경하기
           </Button>

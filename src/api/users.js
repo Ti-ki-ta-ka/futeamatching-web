@@ -23,3 +23,15 @@ export const signUp = async(signUpRequest) => {
   }
   return response.data
 }
+
+export const modifyProfileName = async(modifyProfileRequest) => {
+  const response = await client.put("/users/profile/name", modifyProfileRequest);
+
+  if (response.status === 200) {
+    console.log('프로필 수정 성공 : ', response.data);
+  } else {
+    console.log('프로필 수정 실패 : ', response.data);
+  }
+  return response.data
+}
+
