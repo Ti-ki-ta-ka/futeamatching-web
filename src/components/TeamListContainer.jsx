@@ -15,8 +15,6 @@ const TeamListContainer = () => {
       const data = await getTeams(page - 1); 
       setTeams(data.content);
       setTotalPages(data.totalPages); 
-      console.log(`page : ${page}`)
-      console.log(`total Pages: ${totalPages}`)
     } catch (error) {
       console.error('Error fetching matches:', error);
     }
