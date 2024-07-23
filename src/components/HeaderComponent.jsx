@@ -27,9 +27,13 @@ const HeaderComponent = () => {
           <ActionIcon variant="default" size="lg" onClick={toggleDrawer}>
             <IconMenu2 />
           </ActionIcon>
-          <Text weight={700} size="xl">
-            FuTeaMatching ⚽
-          </Text>
+          <Box
+            onClick={() => navigate('/main')}
+          >
+            <Text weight={700} size="xl">
+              FuTeaMatching ⚽
+            </Text>
+          </Box>
         </Group>
 
         <Group spacing="xs" justify="flex-end">

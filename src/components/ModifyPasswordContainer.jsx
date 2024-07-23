@@ -1,4 +1,5 @@
 import { modifyProfilePassword } from "../api/users";
+import HeaderComponent from "./HeaderComponent.jsx";
 import ModifyPasswordInput from "./ModifyPasswordInput.jsx";
 import { useNavigate } from 'react-router-dom';
 
@@ -16,7 +17,8 @@ const ModifyPasswordContainer = () => {
   };
 
   return (
-    <div>
+    <div style={{ padding: '0 250px' }}>
+      <HeaderComponent/>
       <ModifyPasswordInput modifyPassword={modifyUserPassword} />
     </div>
   );
