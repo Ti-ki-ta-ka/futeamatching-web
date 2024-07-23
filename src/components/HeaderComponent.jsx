@@ -75,10 +75,6 @@ const HeaderComponent = () => {
           )}
         </Group>
       </Group>
-      <Group mt="md" mb="md" spacing="xs">
-        <Button variant="outline" color="green" onClick={() => navigate('/')}>매칭하기</Button>
-        <Button variant="outline" color="green" onClick={() => navigate('/team')}>팀 구하기</Button>
-      </Group>
 
       <Drawer
         opened={drawerOpened}
@@ -95,6 +91,14 @@ const HeaderComponent = () => {
             onClick={() => navigate('/')}
           >
             매칭하기
+          </Button>
+          <Button 
+            fullWidth 
+            variant="subtle" 
+            color="green"
+            onClick={() => navigate('/team/create')}
+          >
+            팀 생성하기
           </Button>
           <Button 
             fullWidth 
