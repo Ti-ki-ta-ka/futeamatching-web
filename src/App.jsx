@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import MainPage from "./pages/MainPage";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
+import ModifyProfilePage from './pages/ModifyProfilePage';
 import { AuthProvider } from './AuthContext'; 
 import "@mantine/core/styles.css";
 
@@ -18,6 +19,7 @@ const App = () => {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/main" element={<MainPage />} />
             <Route path="/signup" element={<SignUpPage />} />
+            <Route path="/profile" element={<ModifyProfilePage />} />
           </Routes>
         </Router>
       </AuthProvider>
