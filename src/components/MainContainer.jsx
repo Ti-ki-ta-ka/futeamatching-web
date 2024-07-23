@@ -1,9 +1,9 @@
-// MainContainer.jsx
 import React, { useEffect, useState } from 'react';
 import { Pagination } from '@mantine/core';
 import { getMatches } from '../api/main';
 import MainList from './MainList';
 import HeaderComponent from './HeaderComponent';
+import MainButtonComponent from './MainButtonComponent';
 
 const MainContainer = () => {
   const [matches, setMatches] = useState([]);
@@ -27,6 +27,7 @@ const MainContainer = () => {
   return (
     <div style={{ padding: '0 250px' }}>
       <HeaderComponent />
+      <MainButtonComponent/>
       <MainList matches={matches} />
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
       <Pagination
