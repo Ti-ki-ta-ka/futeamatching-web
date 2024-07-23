@@ -1,4 +1,3 @@
-// HeaderComponent.jsx
 import React, { useState } from 'react';
 import { Group, Text, Button, ActionIcon, TextInput, Box, Drawer, Divider, Stack } from '@mantine/core';
 import { IconSearch, IconMenu2, IconHome, IconUsers } from '@tabler/icons-react';
@@ -93,7 +92,6 @@ const HeaderComponent = () => {
             fullWidth 
             variant="subtle" 
             color="green"
-            leftIcon={<IconHome size={20} />} 
             onClick={() => navigate('/')}
           >
             매칭하기
@@ -102,7 +100,6 @@ const HeaderComponent = () => {
             fullWidth 
             variant="subtle" 
             color="green"
-            leftIcon={<IconUsers size={20} />} 
             onClick={() => navigate('/profile')}
           >
             프로필 변경하기
@@ -111,8 +108,7 @@ const HeaderComponent = () => {
             fullWidth 
             variant="subtle" 
             color="green"
-            leftIcon={<IconUsers size={20} />} 
-            onClick={() => navigate('/signup')}
+            onClick={() => navigate('/password')}
           >
             비밀번호 수정하기
           </Button>

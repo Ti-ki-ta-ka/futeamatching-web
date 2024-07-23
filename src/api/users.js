@@ -35,3 +35,13 @@ export const modifyProfileName = async(modifyProfileRequest) => {
   return response.data
 }
 
+export const modifyProfilePassword = async(modifyPasswordRequest) => {
+  const response = await client.put("/users/profile/password", modifyPasswordRequest);
+
+  if (response.status === 200) {
+    console.log('비밀번호 변경 성공 : ', response.data);
+  } else {
+    console.log('비밀번호 변경 실패 : ', response.data);
+  }
+  return response.data
+}
