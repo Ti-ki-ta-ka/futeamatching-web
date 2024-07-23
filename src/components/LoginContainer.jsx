@@ -2,19 +2,19 @@ import { useState } from "react";
 import { login } from "../api/users";
 import LoginInput from "./LoginInput";
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../AuthContext';
 
 const LoginContainer = () => {
-  const [tokens, setTokens] = useState([])
+  const { login: loginContext } = useAuth();
   const navigate = useNavigate();
 
   const getTokens = async (loginRequest) => {
     try {
       const data = await login(loginRequest);
-      console.log(data)
-      setTokens(data); 
+      loginContext(); 
       navigate('/main');
     } catch (error) {
-      console.error('Error get tokens:', error);
+      console.error('Error getting tokens:', error);
     }
   };
 
