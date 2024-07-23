@@ -1,4 +1,5 @@
 import { modifyProfileName } from "../api/users";
+import HeaderComponent from "./HeaderComponent.jsx";
 import ModifyProfileInput from "./ModifyProfileInput.jsx";
 import { useNavigate } from 'react-router-dom';
 
@@ -15,7 +16,8 @@ const ModifyProfileContainer = () => {
   };
 
   return (
-    <div>
+    <div style={{ padding: '0 250px' }}>
+      <HeaderComponent/>
       <ModifyProfileInput modifyProfile={modifyUserProfile} />
     </div>
   );
