@@ -10,3 +10,17 @@ export const postTeam = async(createTeamRequest) => {
     }
     return response.data
   }
+
+  export const getTeams = async (page) => {
+    const response = await client.get('/teams', {
+      params: {
+        region: null,
+        page: page,
+        size: 5,
+        sort_by: 'createdAt',
+        sort_direction: 'desc'
+      },
+    });
+  
+    return response.data;
+  };
