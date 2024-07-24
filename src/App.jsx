@@ -10,8 +10,10 @@ import ModifyProfilePage from './pages/ModifyProfilePage';
 import ModifyPasswordPage from './pages/ModifyPasswordPage';
 import CreateTeamPage from './pages/CreateTeamPage';
 import MatchDetailsPage from './pages/MatchDetailsPage';
+import MatchCreatePage from './pages/MatchCreatePage';
 import { AuthProvider } from './AuthContext'; 
 import "@mantine/core/styles.css";
+import '@mantine/dates/styles.css';
 
 
 const App = () => {
@@ -29,6 +31,7 @@ const App = () => {
             <Route path="/team/create" element={<CreateTeamPage />} />
             <Route path="/team/list" element={<TeamListPage />} />
             <Route path="/match/:id" element={<MatchDetailsPage />} /> 
+            <Route path="/matches/create" element={<MatchCreatePage />} /> 
           </Routes>
         </Router>
       </AuthProvider>
