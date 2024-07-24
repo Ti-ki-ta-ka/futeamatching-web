@@ -12,7 +12,6 @@ import CreateTeamPage from './pages/CreateTeamPage';
 import MatchDetailsPage from './pages/MatchDetailsPage';
 import { AuthProvider } from './AuthContext'; 
 import "@mantine/core/styles.css";
-import CreateTeamPage from './pages/CreateTeamPage';
 
 
 const App = () => {
