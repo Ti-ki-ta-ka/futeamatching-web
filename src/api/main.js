@@ -14,16 +14,16 @@ export const getMatches = async (page) => {
 
 export const postMatches = async (matchId) => {
   const response = await client.post(`/matches/${matchId}/match-applications`, {
-    teamId: 22 
+    teamId: 23 
   });
-
+  console.log(response.data)
   return response.data;
 };
 
 export const createMatch = async(createMatchRequest) => {
   const response = await client.post("/matches/create", {
     ...createMatchRequest,
-    teamId: 22 
+    teamId: 23 
   });
 
   if (response.status === 201) {

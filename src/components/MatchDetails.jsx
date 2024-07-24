@@ -10,6 +10,7 @@ const MatchDetails = ({ match, postMatch }) => {
     event.preventDefault();
 
     try {
+      console.log(match)
       const data = await postMatch(match.id);
     } catch (error) {
       console.error("Apply match failed", error);

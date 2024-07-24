@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Text } from '@mantine/core';
 import HeaderComponent from "./HeaderComponent.jsx";
-import MatchDetails from './MainDetails.jsx';
+import MatchDetails from './MatchDetails.jsx';
 import { postMatches } from "../api/main";
 
 
@@ -19,7 +19,7 @@ const MatchDetailsContainer = () => {
     try {
       const data = await postMatches(matchId);
       navigate('/main');
-      console.log("Match application successful", response.data);
+      console.log("Match application successful", data);
     } catch (error) {
       console.error("Apply match failed", error);
       alert(error.response?.data?.message); 
