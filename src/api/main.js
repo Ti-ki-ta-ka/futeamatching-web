@@ -11,3 +11,11 @@ export const getMatches = async (page) => {
 
   return response.data;
 };
+
+export const postMatches = async (matchId) => {
+  const response = await client.post(`/matches/${matchId}/match-applications`, {
+    teamId: 22 
+  });
+
+  return response.data;
+};
