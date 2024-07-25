@@ -13,18 +13,13 @@ export const getMatches = async (page) => {
 };
 
 export const postMatches = async (matchId) => {
-  const response = await client.post(`/matches/${matchId}/match-applications`, {
-    teamId: 23 
-  });
+  const response = await client.post(`/matches/${matchId}/match-applications`);
   console.log(response.data)
   return response.data;
 };
 
 export const createMatch = async(createMatchRequest) => {
-  const response = await client.post("/matches/create", {
-    ...createMatchRequest,
-    teamId: 23 
-  });
+  const response = await client.post("/matches/create", createMatchRequest);
 
   if (response.status === 201) {
     console.log('매치 생성 성공 : ', response.data);
