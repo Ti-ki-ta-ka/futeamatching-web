@@ -8,9 +8,13 @@ import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import ModifyProfilePage from './pages/ModifyProfilePage';
 import ModifyPasswordPage from './pages/ModifyPasswordPage';
+import CreateTeamPage from './pages/CreateTeamPage';
+import MatchDetailsPage from './pages/MatchDetailsPage';
+import MatchCreatePage from './pages/MatchCreatePage';
 import { AuthProvider } from './AuthContext'; 
 import "@mantine/core/styles.css";
-import CreateTeamPage from './pages/CreateTeamPage';
+import '@mantine/dates/styles.css';
+import MyApplicationPage from './pages/MyApplicationPage';
 
 
 const App = () => {
@@ -27,6 +31,9 @@ const App = () => {
             <Route path="/password" element={<ModifyPasswordPage />} />
             <Route path="/team/create" element={<CreateTeamPage />} />
             <Route path="/team/list" element={<TeamListPage />} />
+            <Route path="/match/:id" element={<MatchDetailsPage />} /> 
+            <Route path="/matches/create" element={<MatchCreatePage />} /> 
+            <Route path="/myapplication" element={<MyApplicationPage />} /> 
           </Routes>
         </Router>
       </AuthProvider>

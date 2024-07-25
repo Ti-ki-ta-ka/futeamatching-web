@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Group, Text, Button, ActionIcon, TextInput, Box, Drawer, Divider, Stack } from '@mantine/core';
-import { IconSearch, IconMenu2, IconHome, IconUsers } from '@tabler/icons-react';
+import { IconSearch, IconMenu2 } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext'; 
 
@@ -103,6 +103,22 @@ const HeaderComponent = () => {
             onClick={() => navigate('/team/create')}
           >
             팀 생성하기
+          </Button>
+          <Button 
+            fullWidth 
+            variant="subtle" 
+            color="green"
+            onClick={() => navigate('/matches/create')}
+          >
+            매치 생성하기
+          </Button>
+          <Button 
+            fullWidth 
+            variant="subtle" 
+            color="green"
+            onClick={() => navigate('/myapplication')}
+          >
+            매치 신청 내역
           </Button>
           <Button 
             fullWidth 
