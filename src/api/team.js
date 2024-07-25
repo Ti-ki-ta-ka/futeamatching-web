@@ -24,3 +24,9 @@ export const postTeam = async(createTeamRequest) => {
   
     return response.data;
   };
+
+  export const getTeam = async (teamId) => {
+    const response = await client.get(`/teams/${teamId}`);
+    
+    return response.data;
+  };

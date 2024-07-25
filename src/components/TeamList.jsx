@@ -1,15 +1,17 @@
-// MainList.jsx
 import React from 'react';
 import { Card, Group, Text, Badge, Box } from '@mantine/core';
+import { useNavigate } from 'react-router-dom';
 
 const TeamList = ({ teams }) => {
+  const navigate = useNavigate();
   return (
     <>
       {teams.map((team) => (
         <Card key={team.id} shadow="sm" padding="lg" radius="md" withBorder mb="md">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <Group>
-              <Text fw={500} size="lg">
+              
+              <Text fw={500} size="lg" onClick={() => navigate(`/team/detail/${team.id}`)}>
                 {team.name}
               </Text>
               <Badge color="green" variant="light">

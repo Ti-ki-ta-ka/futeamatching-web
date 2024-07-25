@@ -16,7 +16,7 @@ const TeamListContainer = () => {
       setTeams(data.content);
       setTotalPages(data.totalPages); 
     } catch (error) {
-      console.error('Error fetching matches:', error);
+      console.error('Error fetching teams:', error);
     }
   };
 
