@@ -11,7 +11,7 @@ const TeamList = ({ teams }) => {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <Group>
               
-              <Text fw={500} size="lg" onClick={() => navigate(`/team/detail/${team.id}`)}>
+              <Text fw={500} size="lg" style={{cursor:'pointer'}} onClick={() => navigate(`/team/detail/${team.id}`)}>
                 {team.name}
               </Text>
               <Badge color="green" variant="light">
