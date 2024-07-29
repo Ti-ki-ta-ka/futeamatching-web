@@ -7,11 +7,11 @@ const TeamList = ({ teams }) => {
   return (
     <>
       {teams.map((team) => (
-        <Card key={team.id} shadow="sm" padding="lg" radius="md" withBorder mb="md">
+        <Card key={team.id} shadow="sm" padding="lg" radius="md" withBorder mb="md" style={{cursor:'pointer'}} onClick={() => navigate(`/team/detail/${team.id}`)}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <Group>
               
-              <Text fw={500} size="lg" style={{cursor:'pointer'}} onClick={() => navigate(`/team/detail/${team.id}`)}>
+              <Text fw={500} size="lg" >
                 {team.name}
               </Text>
               <Badge color="green" variant="light">
