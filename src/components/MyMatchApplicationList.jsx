@@ -36,7 +36,7 @@ const MyMatchApplicationList = ({ applications, matchId, onApplicationReplied })
                     </div>
                     <div style={{ textAlign: 'right', marginTop: '10px' }}>
                         <Button
-                            variant="light"
+                            variant="outline"
                             color="blue"
                             onClick={() => handleReply(application.id, 'APPROVE')}
                             disabled={application.approveStatus !== 'WAITING'}
@@ -44,7 +44,7 @@ const MyMatchApplicationList = ({ applications, matchId, onApplicationReplied })
                             승인하기
                         </Button>
                         <Button
-                            variant="light"
+                            variant="outline"
                             color="red"
                             onClick={() => handleReply(application.id, 'REJECT')}
                             disabled={application.approveStatus !== 'WAITING'}
