@@ -9,16 +9,16 @@ const MyMatchApplicationList = ({ applications }) => {
                 <Card key={application.id} shadow="sm" padding="lg" radius="md" withBorder mb="md">
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <Group>
-                            <Text fw={500} size="lg">
-                                신청 팀 ID: {application.applyTeamId}
-                            </Text>
-                            <Badge color="green" variant="light">
-                                상태: {application.approveStatus}
+                            <Badge color="green" variant="light" style={{ fontSize: '1.25rem', fontWeight: 'bold' }}>
+                                신청 팀: {application.applyTeamName}
                             </Badge>
                         </Group>
+                        <Badge color="green" variant="light">
+                            상태: {application.approveStatus}
+                        </Badge>
                     </div>
                     <Text size="md" style={{ marginTop: '10px' }}>
-                        신청자 ID: {application.applyUserId}
+                        신청자: {application.applyUserName}
                     </Text>
 
                     <div style={{ textAlign: 'right' }}>
