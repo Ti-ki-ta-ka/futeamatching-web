@@ -15,7 +15,9 @@ const LoginInput = ({ getTokens }) => {
         email,
         password
       });
+      alert(`오늘도 ${data.userName}님의 매치를 응원합니다! `)
     } catch (error) {
+      alert("잘못된 회원정보입니다. 아이디와 비밀번호를 확인해주세요.")
       console.error("Login failed", error);
     }
   };
