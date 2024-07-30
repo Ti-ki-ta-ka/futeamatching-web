@@ -16,6 +16,7 @@ import "@mantine/core/styles.css";
 import '@mantine/dates/styles.css';
 import MyApplicationPage from './pages/MyApplicationPage';
 import MyTeamMatchPage from './pages/MyTeamMatchPage';
+import MyMatchApplicationPage from './pages/MyMatchApplicationPage';
 
 
 const App = () => {
@@ -36,6 +37,7 @@ const App = () => {
             <Route path="/matches/create" element={<MatchCreatePage />} /> 
             <Route path="/myapplication" element={<MyApplicationPage />} /> 
             <Route path="/myteammatches" element={<MyTeamMatchPage />} /> 
+            <Route path="/mymatchapplications/:id" element={<MyMatchApplicationPage />} /> 
           </Routes>
         </Router>
       </AuthProvider>
