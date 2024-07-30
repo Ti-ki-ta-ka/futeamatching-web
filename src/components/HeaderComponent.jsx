@@ -95,7 +95,7 @@ const HeaderComponent = () => {
             fullWidth 
             variant="subtle" 
             color="green"
-            onClick={() => navigate('/')}
+            onClick={() => navigate('/main')}
           >
             매칭하기
           </Button>
