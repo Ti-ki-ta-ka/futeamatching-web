@@ -3,6 +3,9 @@ import { Group, Text, Button, ActionIcon, TextInput, Box, Drawer, Divider, Stack
 import { IconSearch, IconMenu2 } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext'; 
+import { IconPower} from '@tabler/icons-react';
+
+
 
 const HeaderComponent = () => {
   const [drawerOpened, setDrawerOpened] = useState(false);
@@ -39,10 +42,9 @@ const HeaderComponent = () => {
         <Group spacing="xs" justify="flex-end">
           <TextInput
             placeholder="검색하기"
-            icon={<IconSearch size={16} />}
+            rightSection={<IconSearch size={20} />}
             radius="xl"
             size="md"
-            rightSectionWidth={90}
             sx={{ width: 600 }}
             styles={{ rightSection: { pointerEvents: 'none' } }}
           />
@@ -53,6 +55,7 @@ const HeaderComponent = () => {
               radius="xl"
               size="md"
               onClick={logout}
+              rightSection={<IconPower size={19}/>}
             >
               로그아웃
             </Button>

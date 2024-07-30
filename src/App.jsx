@@ -3,6 +3,7 @@ import React from 'react';
 import { MantineProvider } from '@mantine/core';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import TeamListPage from './pages/TeamListPage'
+import TeamDetailPage from './pages/TeamDetailPage'
 import MainPage from "./pages/MainPage";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
@@ -32,6 +33,7 @@ const App = () => {
             <Route path="/password" element={<ModifyPasswordPage />} />
             <Route path="/team/create" element={<CreateTeamPage />} />
             <Route path="/team/list" element={<TeamListPage />} />
+            <Route path="/team/detail/:teamId" element={<TeamDetailPage />} />
             <Route path="/match/:id" element={<MatchDetailsPage />} /> 
             <Route path="/matches/create" element={<MatchCreatePage />} /> 
             <Route path="/myapplication" element={<MyApplicationPage />} /> 
