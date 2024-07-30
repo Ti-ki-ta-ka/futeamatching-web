@@ -127,6 +127,14 @@ const HeaderComponent = () => {
             fullWidth 
             variant="subtle" 
             color="green"
+            onClick={() => navigate('/myteammatches')}
+          >
+            우리 팀 매치 내역
+          </Button>
+          <Button 
+            fullWidth 
+            variant="subtle" 
+            color="green"
             onClick={() => navigate('/profile')}
           >
             프로필 변경하기
