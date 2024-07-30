@@ -1,4 +1,4 @@
-import { client } from "./client";
+import { client, client2 } from "./client";
 
 export const getMatches = async (page) => {
   const response = await client.get('/matches', {
@@ -18,7 +18,7 @@ export const postMatches = async (matchId) => {
   return response.data;
 };
 
-export const createMatch = async(createMatchRequest) => {
+export const createMatch = async (createMatchRequest) => {
   const response = await client.post("/matches/create", createMatchRequest);
 
   if (response.status === 201) {
@@ -27,4 +27,17 @@ export const createMatch = async(createMatchRequest) => {
     console.log('매치 생성 실패 : ', response.data);
   }
   return response.data
-}
+};
+
+export const getMyTeamMatches = async (page, matchStatus) => {
+  const response = await client2.get("/matches/my-team-matches", {
+    params: {
+      page: page,
+      size: 10,
+      matchStatus: matchStatus,
+    },
+  });
+
+  console.log(response)
+  return response.data;
+};
