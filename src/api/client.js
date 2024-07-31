@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const client = axios.create({
-  baseURL: 'g',
+  baseURL: 'http://ec2-3-38-213-7.ap-northeast-2.compute.amazonaws.com:9090/api/v1',
   headers: {
     "Access-Control-Allow-Origin": "*", // CORS
   },
