@@ -1,7 +1,7 @@
 import HeaderComponent from "./HeaderComponent.jsx";
 import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
-import { getMyApplications } from '../api/application';
+import { getMyApplications } from '../api/matchapplication.js';
 import MyApplicationComponent from "./MyApplicationComponent.jsx";
 
 const MyApplicationContainer = () => {

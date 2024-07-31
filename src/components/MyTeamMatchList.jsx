@@ -1,9 +1,10 @@
 // MainList.jsx
 import React from 'react';
-import { Card, Group, Text, Badge, Box } from '@mantine/core';
+import { Card, Group, Text, Badge, Box, Button } from '@mantine/core';
+import { useNavigate } from 'react-router-dom';
 
 const MyTeamMatchList = ({ matches }) => {
-  console.log("matches", matches)
+  const navigate = useNavigate();
   return (
     <>
       {matches.map((match) => (
@@ -17,7 +18,6 @@ const MyTeamMatchList = ({ matches }) => {
                 {match.region}
               </Badge>
             </Group>
-
           </div>
           <Text size="md">
             {match.content}
@@ -26,16 +26,18 @@ const MyTeamMatchList = ({ matches }) => {
           <Text size="md" style={{ marginTop: '10px' }}>
             경기 시간: {new Date(match.matchDate).toLocaleString()}
           </Text>
-
-
           <div style={{ textAlign: 'right' }}>
             <Text size="sm" color="dimmed"></Text>
             <Text size="sm" color="dimmed">
               {new Date(match.createdAt).toLocaleString()}
             </Text>
           </div>
-
-
+          <Box mt="md" style={{ textAlign: 'right' }}>
+            <Button onClick={() => navigate(`/mymatchapplications/${match.id}`)} variant="gradient"
+              gradient={{ from: 'green', to: 'lime', deg: 64 }}>
+              신청 정보 보기
+            </Button>
+          </Box>
         </Card>
       ))}
     </>
