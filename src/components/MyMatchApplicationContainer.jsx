@@ -28,6 +28,10 @@ const MyMatchApplicationContainer = () => {
         fetchMyMatchApplications(page, approveStatus);
     }, [page, approveStatus]);
 
+    const handleApplicationReplied = () => {
+        fetchMyMatchApplications(page, approveStatus);
+    };
+
     return (
         <div style={{ padding: '0 250px' }}>
             <HeaderComponent />
@@ -45,7 +49,11 @@ const MyMatchApplicationContainer = () => {
                     ]}
                 />
             </div>
-            <MyMatchApplicationList applications={applications} />
+            <MyMatchApplicationList 
+                applications={applications} 
+                matchId={id} 
+                onApplicationReplied={handleApplicationReplied} 
+            />
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
                 <Pagination
                     page={page}

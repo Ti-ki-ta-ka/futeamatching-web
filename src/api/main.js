@@ -41,3 +41,32 @@ export const getMyTeamMatches = async (page, matchStatus) => {
   console.log(response)
   return response.data;
 };
+
+
+export const deleteMatch = async (matchId) => {
+  try {
+    const response = await client2.delete(`/matches/${matchId}`);
+    return response.data;
+  } catch (error) {
+    console.error('매치 삭제 중 오류 발생:', error);
+    throw error;
+  }
+};
+
+export const searchMatches = async (query,page) => {
+  try{
+    const response = await client2.get("/matches/searches", {
+      params:{
+        keyword: query,
+        page: page,
+        size: 5,
+        sort: 'CREATED_AT',
+    }
+    });
+    return response.data;
+  } catch(error){
+    console.error('Error searching matches:',error)
+    throw error
+  }
+};
+

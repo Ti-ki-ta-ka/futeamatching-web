@@ -3,7 +3,7 @@ import { client } from "./client";
 export const login = async (loginRequest) => {
   const response = await client.post("/users/log-in", loginRequest);
   if (response.status === 200) {
-    const { accessToken, refreshToken } = response.data;
+    const { accessToken, refreshToken,userName } = response.data;
     console.log('Login successful:', response.data);
     localStorage.setItem('accessToken', accessToken);
     localStorage.setItem('refreshToken', refreshToken);
