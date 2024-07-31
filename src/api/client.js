@@ -1,19 +1,18 @@
 import axios from "axios";
 
 export const client = axios.create({
-  baseURL: 'http://www.futeamatching.com/api/v1',
+  baseURL: 'https://www.futeamatching.com/api/v1',
   headers: {
     "Access-Control-Allow-Origin": "*", // CORS
   },
 });
 
 export const client2 = axios.create({
-  baseURL: 'http://www.futeamatching.com/api/v2',
+  baseURL: 'https://www.futeamatching.com/api/v2',
   headers: {
     "Access-Control-Allow-Origin": "*", // CORS
   }
 });
-
 
 client.interceptors.request.use(
   (config) => {
