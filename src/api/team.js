@@ -11,19 +11,39 @@ export const postTeam = async(createTeamRequest) => {
     return response.data
   }
 
-  export const getTeams = async (page) => {
+  export const getTeams = async (query,page) => {
+    const sortBy = query || 'createdAt';
     const response = await client.get('/teams', {
       params: {
         region: null,
-        page: page,
+        page: page >= 0 ? page : 0,
         size: 5,
-        sort_by: 'createdAt',
+        sort_by: sortBy,
         sort_direction: 'desc'
       },
     });
   
     return response.data;
   };
+
+  export const searchTeams = async (query, page) => {
+    try {
+      const response = await client.get(`/teams/searches`, {
+        params: {
+          name: query,
+          page,
+          size: 5,
+          sort_by: 'createdAt',
+          sort_direction: 'desc',
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error searching teams:', error);
+      throw error;
+    }
+  };
+  
 
   export const getTeam = async (teamId) => {
     const response = await client.get(`/teams/${teamId}`);
