@@ -51,28 +51,9 @@ const AppRoutes = () => {
         <Route path="/matches/create" element={<MatchCreatePage />} />
         <Route path="/myapplication" element={<MyApplicationPage />} />
         <Route path="/myteammatches" element={<MyTeamMatchPage />} />
+        <Route path="/mymatchapplications/:id" element={<MyMatchApplicationPage />} /> 
       </Routes>
     );
-          <Routes>
-            <Route path="/" element={<Navigate to="/login" />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/main" element={<MainPage />} />
-            <Route path="/signup" element={<SignUpPage />} />
-            <Route path="/profile" element={<ModifyProfilePage />} />
-            <Route path="/password" element={<ModifyPasswordPage />} />
-            <Route path="/team/create" element={<CreateTeamPage />} />
-            <Route path="/team/list" element={<TeamListPage />} />
-            <Route path="/team/detail/:teamId" element={<TeamDetailPage />} />
-            <Route path="/match/:id" element={<MatchDetailsPage />} /> 
-            <Route path="/matches/create" element={<MatchCreatePage />} /> 
-            <Route path="/myapplication" element={<MyApplicationPage />} /> 
-            <Route path="/myteammatches" element={<MyTeamMatchPage />} /> 
-            <Route path="/mymatchapplications/:id" element={<MyMatchApplicationPage />} /> 
-          </Routes>
-        </Router>
-      </AuthProvider>
-    </MantineProvider>
-  );
 };
 
 export default App;
