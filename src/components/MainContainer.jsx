@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Pagination } from '@mantine/core';
-import { getMatches } from '../api/main';
+import { getMatches, searchMatches } from '../api/main';
 import MainList from './MainList';
 import HeaderComponent from './HeaderComponent';
 import MainButtonComponent from './MainButtonComponent';
+import spartaBanner from '../assets/spartabannerT.jpg'
+import BannerComponent from './BannerComponent';
 
 const MainContainer = () => {
   const [matches, setMatches] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const fetchMatches = async (page) => {
     try {
@@ -20,14 +23,36 @@ const MainContainer = () => {
     }
   };
 
+  const handleSearch = async (query) => {
+    setSearchQuery(query);
+    setPage(1);
+    try {
+      const data = await searchMatches(query, 0);
+      setMatches(data.content);
+      setTotalPages(data.totalPages);
+    } catch (error) {
+      console.error('Error searching teams:', error);
+    }
+  };
+
   useEffect(() => {
-    fetchMatches(page);
-  }, [page]);
+    if (searchQuery) {
+      searchMatches(searchQuery, page - 1).then(data => {
+        setMatches(data.content);
+        setTotalPages(data.totalPages);
+      }).catch(error => {
+        console.error('Error searching teams:', error);
+      });
+    } else {
+      fetchMatches(page);
+    }
+  }, [page, searchQuery]);
 
   return (
     <div style={{ padding: '0 250px' }}>
-      <HeaderComponent />
+      <HeaderComponent onSearch={handleSearch} />
       <MainButtonComponent/>
+      <BannerComponent imageUrl={spartaBanner}/>
       <MainList matches={matches} />
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
       <Pagination
