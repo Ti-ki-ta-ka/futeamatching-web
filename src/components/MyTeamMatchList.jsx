@@ -49,7 +49,8 @@ const MyTeamMatchList = ({ matches }) => {
               gradient={{ from: 'green', to: 'lime', deg: 64 }}>
               신청 정보 보기
             </Button>
-            <Button onClick={() => handleDelete(match.id)} variant="gradient" color="red" style={{ marginLeft: '10px' }}>
+            <Button onClick={() => handleDelete(match.id)} variant="gradient"
+              gradient={{ from: 'red', to: 'pink', deg: 131 }} style={{ marginLeft: '10px' }}>
               삭제하기
             </Button>
           </Box>
