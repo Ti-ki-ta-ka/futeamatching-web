@@ -42,6 +42,7 @@ export const getMyTeamMatches = async (page, matchStatus) => {
   return response.data;
 };
 
+
 export const deleteMatch = async (matchId) => {
   try {
     const response = await client2.delete(`/matches/${matchId}`);
@@ -51,3 +52,21 @@ export const deleteMatch = async (matchId) => {
     throw error;
   }
 };
+
+export const searchMatches = async (query,page) => {
+  try{
+    const response = await client2.get("/matches/searches", {
+      params:{
+        keyword: query,
+        page: page,
+        size: 5,
+        sort: 'CREATED_AT',
+    }
+    });
+    return response.data;
+  } catch(error){
+    console.error('Error searching matches:',error)
+    throw error
+  }
+};
+
