@@ -28,3 +28,13 @@ export const getMyMatchApplications = async (matchId, page, approveStatus) => {
     throw error;
   }
 };
+
+export const replyMatchApplication = async (matchId, applicationId, request) => {
+    try {
+        const response = await client2.patch(`/matches/${matchId}/match-applications/${applicationId}`, request);
+        return response.data;
+    } catch (error) {
+        console.error('응답하기 요청 실패:', error);
+        throw error;
+    }
+};
