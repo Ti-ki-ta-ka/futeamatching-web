@@ -1,18 +1,17 @@
 import axios from "axios";
 
 export const client = axios.create({
-  baseURL: 'http://localhost:8080/api/v1',
+  baseURL: 'http://ec2-3-38-213-7.ap-northeast-2.compute.amazonaws.com:9090/api/v1',
   headers: {
     "Access-Control-Allow-Origin": "*", // CORS
   },
 });
 
 export const client2 = axios.create({
-  baseURL: 'http://localhost:8080/api/v2',
+  baseURL: 'http://ec2-3-38-213-7.ap-northeast-2.compute.amazonaws.com:9090/api/v2',
   headers: {
     "Access-Control-Allow-Origin": "*", // CORS
-  },
-
+  }
 });
 
 
