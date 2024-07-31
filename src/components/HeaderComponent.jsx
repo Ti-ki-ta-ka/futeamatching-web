@@ -4,17 +4,37 @@ import { IconSearch, IconMenu2 } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext'; 
 import { IconPower} from '@tabler/icons-react';
+import {IconRefresh} from '@tabler/icons-react';
 
 
 
-const HeaderComponent = () => {
+
+const HeaderComponent = ({ onSearch, clearSearch }) => {
   const [drawerOpened, setDrawerOpened] = useState(false);
   const navigate = useNavigate();
   const { isAuthenticated, logout } = useAuth();
+  const [searchQuery, setSearchQuery] = useState("");
 
   const toggleDrawer = () => {
     setDrawerOpened((prev) => !prev);
   };
+
+  const handleInputChange = (event) => {
+    const query = event.currentTarget.value;
+    setSearchQuery(query);
+  };
+
+  
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      onSearch(searchQuery);
+    }
+  };
+
+  const handleClearSearch = () => {
+    setSearchQuery("");
+    clearSearch();
+  }
 
   return (
     <Box
@@ -40,13 +60,26 @@ const HeaderComponent = () => {
         </Group>
 
         <Group spacing="xs" justify="flex-end">
-          <TextInput
+        <Button
+              variant="outline"
+              color="Green"
+              radius="xl"
+              size="md"
+              onClick={handleClearSearch}
+              rightSection={<IconRefresh size={19}/>}
+            >
+              목록 초기화
+            </Button>
+        <TextInput
             placeholder="검색하기"
             rightSection={<IconSearch size={20} />}
             radius="xl"
             size="md"
             sx={{ width: 600 }}
             styles={{ rightSection: { pointerEvents: 'none' } }}
+            value={searchQuery}
+            onChange={handleInputChange}
+            onKeyDown={handleKeyDown}
           />
           {isAuthenticated ? (
             <Button
@@ -82,6 +115,8 @@ const HeaderComponent = () => {
           )}
         </Group>
       </Group>
+
+      
 
       <Drawer
         opened={drawerOpened}
