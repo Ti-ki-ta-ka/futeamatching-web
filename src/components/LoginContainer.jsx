@@ -13,6 +13,7 @@ const LoginContainer = () => {
       const data = await login(loginRequest);
       loginContext(); 
       navigate('/main');
+      return data
     } catch (error) {
       console.error('Error getting tokens:', error);
     }
