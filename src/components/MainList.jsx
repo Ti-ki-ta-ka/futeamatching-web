@@ -11,6 +11,7 @@ const MainList = ({ matches }) => {
 
   return (
     <>
+      {matches.length === 0 && <Text>이 날짜에는 매치가 없네요.. 직접 등록해보는건 어떨까요?</Text>}
       {matches.map((match) => (
         <Card 
           key={match.id} 
