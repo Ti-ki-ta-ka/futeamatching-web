@@ -13,6 +13,23 @@ const MatchCreateInput = ({ createMatch }) => {
   const [content, setContent] = useState('');
   const navigate = useNavigate();
 
+  const options = [
+    { value: 'SEOUL', label: '서울' },
+    { value: 'BUSAN', label: '부산' },
+    { value: 'DAEGU', label: '대구' },
+    { value: 'INCHEON', label: '인천' },
+    { value: 'GWANGJU', label: '광주' },
+    { value: 'DAEJEON', label: '대전' },
+    { value: 'ULSAN', label: '울산' },
+    { value: 'SEJONG', label: '세종' },
+    { value: 'GYEONGGI', label: '경기' },
+    { value: 'GANGWON', label: '강원' },
+    { value: 'CHUNGCHEONG', label: '충청' },
+    { value: 'JEOLLA', label: '전라' },
+    { value: 'GYEONGSANG', label: '경상' },
+    { value: 'JEJU', label: '제주' }
+];
+
   const handleCreateMatch = async (event) => {
     event.preventDefault();
 
@@ -33,6 +50,16 @@ const MatchCreateInput = ({ createMatch }) => {
         content,
       });
       navigate('/main');
+      alert(`매치가 성공적으로 등록되었습니다!
+        
+        누구와 붙게 될까요!?
+
+        매치 정보
+        제목 : ${title}
+        경기 날짜 : ${formattedDateTime}
+        지역 : ${regionsString}
+        장소 : ${location}
+        `)
     } catch (error) {
       console.error("매치 생성 실패", error);
     }
@@ -50,7 +77,7 @@ const MatchCreateInput = ({ createMatch }) => {
       <Text fw={500} ta="center">FuTeaMatching⚽</Text>
       <Paper shadow="xs" padding="md" withBorder style={{ marginTop: '10px', padding: '20px' }}>
         <TextInput
-          label="Title"
+          label="ex) 이런 사람들이 신청하면 좋겠어요, 우리는 이런 팀이에요"
           placeholder="제목"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
@@ -59,7 +86,7 @@ const MatchCreateInput = ({ createMatch }) => {
         />
 
         <DateTimePicker
-          label="Match Date & Time"
+          label="이 날 경기해요"
           placeholder="경기 날짜와 시간"
           value={matchDateTime}
           onChange={setMatchDateTime}
@@ -69,31 +96,16 @@ const MatchCreateInput = ({ createMatch }) => {
         />
 
         <MultiSelect
-          label="Region"
+          label="진행하는 지역명"
           placeholder="지역"
-          data={[
-            'SEOUL',
-            'BUSAN',
-            'DAEGU',
-            'INCHEON',
-            'GWANGJU',
-            'DAEJEON',
-            'ULSAN',
-            'SEJONG',
-            'GYEONGGI',
-            'GANGWON',
-            'CHUNGCHEONG',
-            'JEOLLA',
-            'GYEONGSANG',
-            'JEJU'
-          ]}
+          data={options}
           value={region}
           onChange={setRegion}
           maxValues={1}
           mb="md"
         />
         <TextInput
-          label="Location"
+          label="구체적인 장소 ex) ~~ 축구장"
           placeholder="경기 장소"
           value={location}
           onChange={(e) => setLocation(e.target.value)}
@@ -101,7 +113,7 @@ const MatchCreateInput = ({ createMatch }) => {
           style={{ marginBottom: '30px' }}
         />
         <TextInput
-          label="Content"
+          label="부가 설명을 해주세요"
           placeholder="내용"
           value={content}
           onChange={(e) => setContent(e.target.value)}
