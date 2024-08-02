@@ -7,8 +7,9 @@ import MainButtonComponent from './MainButtonComponent';
 import spartaBanner from '../assets/spartabannerT.jpg'
 import BannerComponent from './BannerComponent';
 import MainListFilter from './MainListFilter';
-import DateComponent from './DateComponent';
+import RecentTwoWeeksDatePicker from './RecentTwoWeeksDatePicker';
 import dayjs from 'dayjs';
+import DatePickerCalendar from './DatePickerCalendar';
 
 const MainContainer = () => {
   const [matches, setMatches] = useState([]);
@@ -18,6 +19,7 @@ const MainContainer = () => {
   const [selectedDate, setSelectedDate] = useState(dayjs());
   const [selectedRegions, setSelectedRegions] = useState([]);
   const [isClearSearch,setIsClearSearch] = useState(false);
+  const [isOpenCalendar,setIsOpenCalendar] = useState(false);
 
   const fetchMatches = async (page, date, regions) => {
     try {
@@ -55,6 +57,10 @@ const MainContainer = () => {
     fetchMatches(1, "",""); 
   };
 
+  const toggleCalendar = () => {
+    setIsOpenCalendar((prev) => !prev); 
+  };
+
   useEffect(() => {
     if (searchQuery) {
       searchMatches(searchQuery, page - 1)
@@ -78,7 +84,10 @@ const MainContainer = () => {
       <MainListFilter onFilter={handleRegionFilter} disable={Boolean(searchQuery)} isClearSearch={isClearSearch} />
       </div>
       <div style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
-      <DateComponent onDateSelect={setSelectedDate} style={{width:'1500px'}}/>
+      <RecentTwoWeeksDatePicker onDateSelect={setSelectedDate} disabled={isOpenCalendar} style={{width:'1500px'}}/>
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <DatePickerCalendar openCalendar={toggleCalendar} isOpenCalendar={isOpenCalendar} onDateSelect={setSelectedDate} />
       </div>
       <BannerComponent imageUrl={spartaBanner}/>
       <MainList matches={matches} />
