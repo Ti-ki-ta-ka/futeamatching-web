@@ -24,7 +24,7 @@ const MainListFilter = ({ onFilter, disable, isClearSearch }) => {
 
     useEffect(() => {
         if (isClearSearch) {
-            setRegion('');
+            setRegion([]);
            // Select의 값을 초기화
         }
       }, [isClearSearch]);
