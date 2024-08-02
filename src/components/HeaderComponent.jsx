@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
 import { Group, Text, Button, ActionIcon, TextInput, Box, Drawer, Divider, Stack } from '@mantine/core';
-import { IconSearch, IconMenu2 } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext'; 
-import { IconPower} from '@tabler/icons-react';
-import {IconRefresh} from '@tabler/icons-react';
+import { IconPower,
+         IconRefresh,
+         IconSearch, 
+         IconMenu2,
+         IconHome,
+         IconSwords,
+         IconUserCircle,
+         IconReport,
+         IconKey
+} from '@tabler/icons-react';
 
 
 
@@ -124,53 +131,48 @@ const HeaderComponent = ({ onSearch, clearSearch }) => {
         title="메뉴"
         padding="xl"
         size="md"
+        style={{color:'green'}}
       >
-        <Stack spacing="sm">
+        <Stack 
+        spacing="sm"
+        >
           <Button 
             fullWidth 
             variant="subtle" 
             color="green"
             onClick={() => navigate('/main')}
+            leftSection={<IconHome size={19}/>}
+            style={{display:'flex', justifyContent:'start'}}
           >
-            매칭하기
-          </Button>
-          <Button 
-            fullWidth 
-            variant="subtle" 
-            color="green"
-            onClick={() => navigate('/team/create')}
-          >
-            팀 생성하기
-          </Button>
-          <Button 
-            fullWidth 
-            variant="subtle" 
-            color="green"
-            onClick={() => navigate('/matches/create')}
-          >
-            매치 생성하기
+            홈
           </Button>
           <Button 
             fullWidth 
             variant="subtle" 
             color="green"
             onClick={() => navigate('/myapplication')}
+            leftSection={<IconSwords size={19}/>}
+            style={{display:'flex', justifyContent:'start'}}
           >
-            매치 신청 내역
+            우리 팀 매치 신청 내역
           </Button>
           <Button 
             fullWidth 
             variant="subtle" 
             color="green"
             onClick={() => navigate('/myteammatches')}
+            leftSection={<IconReport size={19}/>}
+            style={{display:'flex', justifyContent:'start'}}
           >
-            우리 팀 매치 내역
+            우리 팀 매치 등록 내역
           </Button>
           <Button 
             fullWidth 
             variant="subtle" 
             color="green"
             onClick={() => navigate('/profile')}
+            leftSection={<IconUserCircle size={19}/>}
+            style={{display:'flex', justifyContent:'start'}}
           >
             프로필 변경하기
           </Button>
@@ -179,6 +181,8 @@ const HeaderComponent = ({ onSearch, clearSearch }) => {
             variant="subtle" 
             color="green"
             onClick={() => navigate('/password')}
+            leftSection={<IconKey size={19}/>}
+            style={{display:'flex', justifyContent:'start'}}
           >
             비밀번호 수정하기
           </Button>
