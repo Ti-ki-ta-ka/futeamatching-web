@@ -2,6 +2,7 @@ import { createMatch } from "../api/main";
 import MatchCreateInput from "./MatchCreateInput.jsx";
 import { useNavigate } from 'react-router-dom';
 import HeaderComponent from "./HeaderComponent.jsx";
+import MainButtonComponent from "./MainButtonComponent"
 
 const MatchCreateContainer = () => {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ const MatchCreateContainer = () => {
   return (
     <div style={{ padding: '0 250px' }}>
       <HeaderComponent/>
+      <MainButtonComponent/>
       <MatchCreateInput createMatch={postNewMatch} />
     </div>
   );
