@@ -1,21 +1,53 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, Group, Text, Badge, Textarea, Button } from '@mantine/core';
+import { useNavigate, useParams } from 'react-router-dom';
+import { client2 } from "../api/client";
 
-const MatchDetails = ({ match, postMatch }) => {
-  if (!match) {
-    return <Text>Match details not found.</Text>;
-  }
+const MatchDetails = ({ postMatch }) => {
+  const [match, setMatch] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchMatch = async () => {
+      try {
+        const response = await client2.get(`/matches/${id}`);
+        const matchData = response.data;
+        setMatch(matchData);
+
+        if (matchData.matchStatus) {
+          navigate('/main');
+        } else {
+          setLoading(false);
+        }
+      } catch (error) {
+        console.error("Failed to fetch match details", error);
+        navigate('/main');
+      }
+    };
+
+    fetchMatch();
+  }, [id, navigate]);
 
   const applyMatch = async (event) => {
     event.preventDefault();
 
     try {
-      console.log(match)
-      const data = await postMatch(match.id);
+      console.log(match);
+      await postMatch(match.id);
     } catch (error) {
       console.error("Apply match failed", error);
     }
   };
+
+  if (loading) {
+    return <Text>Loading...</Text>;
+  }
+
+  if (!match) {
+    return <Text>Match details not found.</Text>;
+  }
 
   return (
     <form
@@ -63,6 +95,7 @@ const MatchDetails = ({ match, postMatch }) => {
           fullWidth
           mt="md"
           style={{ marginBottom: '20px' }}
+          disabled={match.matchStatus}
         >
           신청하기
         </Button>
