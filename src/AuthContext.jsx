@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
-  const login = () => {
+  const login = (token) => {
     setIsAuthenticated(true);
   };
 
