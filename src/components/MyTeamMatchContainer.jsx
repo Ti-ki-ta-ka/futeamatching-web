@@ -5,6 +5,7 @@ import MyTeamMatchList from './MyTeamMatchList';
 import HeaderComponent from "./HeaderComponent.jsx";
 import { IconSoccerField } from '@tabler/icons-react';
 import MainButtonComponent from "./MainButtonComponent"
+import { deleteMatch } from '../api/main';
 const MyTeamMatchContainer = () => {
   const [matches, setMatches] = useState([]);
   const [page, setPage] = useState(1);
@@ -14,7 +15,6 @@ const MyTeamMatchContainer = () => {
   const fetchMyTeamMatches = async (page, matchStatus) => {
     try {
       const data = await getMyTeamMatches(page - 1, matchStatus);
-      console.log(data)
       setMatches(data.content);
       setTotalPages(data.totalPages);
     } catch (error) {
@@ -25,6 +25,16 @@ const MyTeamMatchContainer = () => {
   useEffect(() => {
     fetchMyTeamMatches(page, matchStatus);
   }, [page, matchStatus]);
+
+  const handleDelete = async (matchId) => {
+    try {
+      await deleteMatch(matchId);
+      alert('매치가 삭제되었습니다.');
+      fetchMyTeamMatches(page, matchStatus);
+    } catch (error) {
+      alert('매치를 삭제할 수 있는 권한이 없습니다.');
+    }
+  };
 
   return (
     <div style={{ padding: '0 250px' }}>
@@ -42,7 +52,7 @@ const MyTeamMatchContainer = () => {
           ]}
         />
       </div>
-      <MyTeamMatchList matches={matches} />
+      <MyTeamMatchList matches={matches} onDelete={handleDelete} />
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
         <Pagination
           page={page}

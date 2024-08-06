@@ -7,6 +7,7 @@ export const getMatches = async (page, date, regions) => {
     sort: 'createdAt,desc',
     matchDate: date,
   };
+  console.log(date);
 
   if (regions.length > 0) {
     params.regions = regions.join(',');
