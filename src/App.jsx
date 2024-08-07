@@ -21,6 +21,13 @@ import MyMatchApplicationPage from './pages/MyMatchApplicationPage';
 
 
 const App = () => {
+  useEffect(() => {
+    if (!window.Kakao.isInitialized()) {
+      window.Kakao.init('4c50edade59f7259c07930d39a810db2'); // Replace with your Kakao JavaScript key
+      console.log(window.Kakao.isInitialized()); // Check if initialized successfully
+    }
+  }, []);
+
   return (
     <MantineProvider>
       <AuthProvider>

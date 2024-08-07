@@ -22,6 +22,34 @@ const LoginInput = ({ getTokens }) => {
     }
   };
 
+  const handleKakaoLogin = () => {
+    if (!window.Kakao.isInitialized()) {
+      console.error("Kakao SDK is not initialized");
+      return;
+    }
+
+    window.Kakao.Auth.login({
+      success: (authObj) => {
+        console.log(authObj);
+        localStorage.setItem('accessToken', authObj.access_token);
+        localStorage.setItem('refreshToken', authObj.refresh_token);
+        window.Kakao.API.request({
+          url: '/v2/user/me',
+          success: (res) => {
+            console.log(res);
+            localStorage.setItem('kakaoUser', JSON.stringify(res));
+          },
+          fail: (error) => {
+            console.error("Failed to get user information", error);
+          }
+        });
+      },
+      fail: (err) => {
+        console.error("Kakao login failed", err);
+      },
+    });
+  };
+
   return (
     <form
       onSubmit={handleLogin}
@@ -60,8 +88,17 @@ const LoginInput = ({ getTokens }) => {
         네이버 로그인
       </Button>
 
-      <Button variant="filled" color="rgba(255, 219, 59, 1)" fullWidth onClick={() => navigate('/signup')} style={{ marginTop: '10px' }}>
-        카카오 로그인
+      
+
+      <Button variant="filled"
+       color="rgba(255, 219, 59, 1)"
+       fullWidth
+       onClick={handleKakaoLogin} 
+       style={{ marginTop: '10px' }}
+       >
+       
+      <img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="222"
+    alt="카카오 로그인 버튼" />
       </Button>
     </form>
   );
