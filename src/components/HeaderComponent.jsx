@@ -22,6 +22,7 @@ const HeaderComponent = ({ onSearch, clearSearch }) => {
   const { isAuthenticated, logout } = useAuth();
   const [searchQuery, setSearchQuery] = useState("");
 
+
   const toggleDrawer = () => {
     setDrawerOpened((prev) => !prev);
   };
@@ -145,6 +146,16 @@ const HeaderComponent = ({ onSearch, clearSearch }) => {
             style={{display:'flex', justifyContent:'start'}}
           >
             홈
+          </Button>
+          <Button 
+            fullWidth 
+            variant="subtle" 
+            color="green"
+            onClick={() => navigate('/myteam')}
+            leftSection={<IconSwords size={19}/>}
+            style={{display:'flex', justifyContent:'start'}}
+          >
+            내 팀 정보
           </Button>
           <Button 
             fullWidth 
