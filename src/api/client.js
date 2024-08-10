@@ -11,7 +11,8 @@ export const client2 = axios.create({
   baseURL: 'http://localhost:8080/api/v2',
   headers: {
     "Access-Control-Allow-Origin": "*", // CORS
-  }
+  },
+  withCredentials: true
 });
 
 client.interceptors.request.use(

@@ -18,6 +18,7 @@ import '@mantine/dates/styles.css';
 import MyApplicationPage from './pages/MyApplicationPage';
 import MyTeamMatchPage from './pages/MyTeamMatchPage';
 import MyMatchApplicationPage from './pages/MyMatchApplicationPage';
+import OAuthKakaoPage from './pages/OAuthKakaoPage';
 
 
 const App = () => {
@@ -45,6 +46,7 @@ const AppRoutes = () => {
 
     return (
       <Routes>
+        <Route path="/oauth/kakao" element={<OAuthKakaoPage />} />
         <Route path="/" element={<Navigate to={token ? '/main' : '/login'} />} />
         <Route path="/login" element={token ? <Navigate to="/main" /> : <LoginPage />} />
         <Route path="/main" element={<MainPage />} />

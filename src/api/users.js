@@ -1,4 +1,4 @@
-import { client } from "./client";
+import { client, client2 } from "./client";
 
 export const login = async (loginRequest) => {
   const response = await client.post("/users/log-in", loginRequest);
@@ -45,3 +45,13 @@ export const modifyProfilePassword = async(modifyPasswordRequest) => {
   }
   return response.data
 }
+
+export const kakaoSocialLogin = async (code) => {
+  try {
+    const response = await client2.get(`/login/oauth2/code/kakao?code=${code}`);
+    localStorage.setItem("accessToken", response.data);
+  } catch (error) {
+    console.error("Kakao Social Login failed:", error.response?.data || error.message);
+    return { success: false, message: error.response?.data?.message || error.message };
+  }
+};
