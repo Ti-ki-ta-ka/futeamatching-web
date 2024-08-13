@@ -20,9 +20,20 @@ import MyTeamMatchPage from './pages/MyTeamMatchPage';
 import MyMatchApplicationPage from './pages/MyMatchApplicationPage';
 import MyTeamPage from './pages/MyTeamPage';
 import MyTeamMemberPage from './pages/MyTeamMemberPage';
+import OAuthKakaoPage from './pages/OAuthKakaoPage';
+import OAuthNaverPage from './pages/OAuthNaverPage';
 
 
 const App = () => {
+  useEffect(() => {
+    if (!window.Kakao.isInitialized()) {
+      window.Kakao.init('4c50edade59f7259c07930d39a810db2');
+      console.log(window.Kakao.isInitialized());
+    }
+  }, []);
+
+  
+
   return (
     <MantineProvider>
       <AuthProvider>
@@ -40,6 +51,8 @@ const AppRoutes = () => {
 
     return (
       <Routes>
+        <Route path="/oauth/naver" element={<OAuthNaverPage />} />
+        <Route path="/oauth/kakao" element={<OAuthKakaoPage />} />
         <Route path="/" element={<Navigate to={token ? '/main' : '/login'} />} />
         <Route path="/login" element={token ? <Navigate to="/main" /> : <LoginPage />} />
         <Route path="/main" element={<MainPage />} />
