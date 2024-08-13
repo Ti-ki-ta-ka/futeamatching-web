@@ -8,7 +8,7 @@ import MyTeamButtonComponent from './MyTeamButtonComponent';
 const MyTeamMemberContainer = () => {
   const [teamMembers, setTeamMembers] = useState([]);
 
-  const fetchMyTeamMemvers = async () => {
+  const fetchMyTeamMembers = async () => {
     try {
       const data = await getMyTeamMembers();
       console.log(data)
@@ -19,7 +19,7 @@ const MyTeamMemberContainer = () => {
   };
 
   useEffect(() => {
-    fetchMyTeamMemvers();  
+    fetchMyTeamMembers();  
   }, []);
 
   

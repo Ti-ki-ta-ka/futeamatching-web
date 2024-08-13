@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card, Avatar, Text, Group, Button } from '@mantine/core';
 import styles from './TeamDetail.module.css'; // Import the CSS module
 import goalnet from '../assets/goalnet.jpg'
@@ -6,6 +7,7 @@ import dribble from '../assets/dribble.jpg'
 
 const MyTeam = ({ team }) => {
   if (!team) return null;
+  const navigate = useNavigate();
 
   const stats = [
     { value: (team.mannerScore), label: '매너점수' },
@@ -50,7 +52,7 @@ const MyTeam = ({ team }) => {
       </Group>
       
       
-      <Button fullWidth radius="md" mt="xl" size="md" variant="default" style={{backgroundColor:'#40C057'}}>
+      <Button fullWidth radius="md" mt="xl" size="md" variant="default" style={{backgroundColor:'#40C057'}} onClick={() => navigate('/myteammember')}>
         멤버 보기
       </Button>
     </Card>
