@@ -43,6 +43,11 @@ const HeaderComponent = ({ onSearch, clearSearch }) => {
     clearSearch();
   }
 
+  const handleLogout = () => {
+    logout();
+    window.location.href = '/login';
+  };
+
   return (
     <Box
       sx={(theme) => ({
@@ -94,7 +99,7 @@ const HeaderComponent = ({ onSearch, clearSearch }) => {
               color="gray"
               radius="xl"
               size="md"
-              onClick={logout}
+              onClick={handleLogout}
               rightSection={<IconPower size={19}/>}
             >
               로그아웃
