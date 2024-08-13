@@ -55,3 +55,13 @@ export const kakaoSocialLogin = async (code) => {
     return { success: false, message: error.response?.data?.message || error.message };
   }
 };
+
+export const naverSocialLogin = async (code) => {
+  try {
+    const response = await client2.get(`/login/oauth2/code/naver?code=${code}`);
+    localStorage.setItem("accessToken", response.data);
+  } catch (error) {
+    console.error("Naver Social Login failed:", error.response?.data || error.message);
+    return { success: false, message: error.response?.data?.message || error.message };
+  }
+};

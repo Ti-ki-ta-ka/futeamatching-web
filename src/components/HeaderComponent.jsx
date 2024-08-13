@@ -45,7 +45,7 @@ const HeaderComponent = ({ onSearch, clearSearch }) => {
 
   const handleLogout = () => {
     logout();
-    navigate('/login');
+    window.location.href = '/login';
   };
 
   return (

@@ -1,7 +1,9 @@
-import { Button, TextInput } from "@mantine/core";
+import { Button, TextInput, Text } from "@mantine/core";
 import { useNavigate } from 'react-router-dom';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from 'axios';
+import kakao_login_medium_narrow from '../assets/kakao_login_medium_narrow.png';
+import btnG_naver from '../assets/btnG_naver.png';
 
 const LoginInput = ({ getTokens }) => {
   const [email, setEmail] = useState('');
@@ -31,6 +33,16 @@ const LoginInput = ({ getTokens }) => {
     window.location.href = `http://localhost:8080/api/v2/oauth/naver`;
   };
 
+  useEffect(()=>{
+    const naverLogin = new window.naver.LoginWithNaverId({
+      clientId: "cAYdVptUCJxBlEfLbcdO", // Replace with your Naver client ID
+      callbackUrl: "http://localhost:5173/oauth/naver", // Replace with your Naver callback URL
+      isPopup: false,
+      loginButton: { color: "green", type: 3, height: 40 }
+    });
+    naverLogin.init();
+  },[])
+
   return (
     <form
       onSubmit={handleLogin}
@@ -40,21 +52,22 @@ const LoginInput = ({ getTokens }) => {
         marginTop: 300
       }}
     >
+      <Text fw={500} ta="center">FuTeaMatching⚽</Text>
       <TextInput
-        label="Email"
         placeholder="이메일"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required
+        style={{marginTop:'1vh'}}
       />
 
       <TextInput
-        label="Password"
         placeholder="비밀번호"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         type="password"
         required
+        style={{marginTop:'1vh'}}
       />
 
       <Button variant="filled" color="green" type="submit" fullWidth style={{ marginTop: '20px' }}>
@@ -64,26 +77,69 @@ const LoginInput = ({ getTokens }) => {
       <Button variant="outline" color="green" fullWidth onClick={() => navigate('/signup')} style={{ marginTop: '10px' }}>
         회원가입
       </Button>
+      
 
-      <Button variant="filled" color="green" fullWidth onClick={handleNaverLogin} style={{ marginTop: '10px' }}>
-        네이버 로그인
-      </Button>
+      <div
+      style={{
+        display:'flex',
+        flexDirection:'column',
+        justifyContent:'center',
+        alignItems:'center',
+        width:'100%'
+      }}>
+              <div
+  style={{
+    display: 'flex',
+    alignItems: 'center',
+    marginTop: '5vh',
+    color: '#6c757d', // Adjust text color if needed
+  }}
+>
+  <hr
+    style={{
+      flex: 1,
+      border: 'none',
+      borderTop: '1px solid #6c757d', // Adjust line color if needed
+      margin: '0 1rem',
+    }}
+  />
+  <span>또는 다른 서비스 계정으로 로그인</span>
+  <hr
+    style={{
+      flex: 1,
+      border: 'none',
+      borderTop: '1px solid #6c757d', // Adjust line color if needed
+      margin: '0 1rem',
+    }}
+  />
+</div>
+        <Button
+        id='naverIdLogin'
+        onClick={handleNaverLogin}
+        style={{
+          backgroundColor:'white',
+          marginTop:'1vh'
+        }}
+
+          >
+        </Button>
 
       <Button
-                onClick={handleKakaoLogin}
-                fullWidth
-                variant="contained"
-                color="primary"
-                sx={{
-                  mt: 2,
-                  fontSize: "1rem",
-                  backgroundColor: "#eeeeee",
-                  color: "#000000",
-                  "&:hover": { backgroundColor: "gold" },
-                }}>
-              
-                카카오 로그인
-              </Button>
+      onClick={handleKakaoLogin}
+      style={{
+        backgroundImage: `url(${kakao_login_medium_narrow})`,
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',  // Corrected to 'backgroundSize'
+        width: '38.5%',
+        height: '4vh',
+        marginTop:'1vh'
+      }}
+      >
+    </Button>
+
+      </div>
+      
+      
     </form>
   );
 };
