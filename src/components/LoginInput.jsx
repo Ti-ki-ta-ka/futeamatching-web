@@ -26,17 +26,17 @@ const LoginInput = ({ getTokens }) => {
   };
 
   const handleKakaoLogin = () => {
-    window.location.href = `http://localhost:8080/api/v2/oauth/kakako`;
+    window.location.href = `https://www.futeamatching.com/api/v2/oauth/kakako`;
   };
 
   const handleNaverLogin = () => {
-    window.location.href = `http://localhost:8080/api/v2/oauth/naver`;
+    window.location.href = `https://www.futeamatching.com/api/v2/oauth/naver`;
   };
 
   useEffect(()=>{
     const naverLogin = new window.naver.LoginWithNaverId({
       clientId: "cAYdVptUCJxBlEfLbcdO", // Replace with your Naver client ID
-      callbackUrl: "http://localhost:5173/oauth/naver", // Replace with your Naver callback URL
+      callbackUrl: "https://futeamatching.vercel.app/oauth/naver", // Replace with your Naver callback URL
       isPopup: false,
       loginButton: { color: "green", type: 3, height: 40 }
     });
