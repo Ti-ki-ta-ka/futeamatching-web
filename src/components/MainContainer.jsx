@@ -24,9 +24,7 @@ const MainContainer = () => {
   const fetchMatches = async (page, date, regions) => {
     try {
       const formattedDate = date ? dayjs(date).format('YYYY-MM-DD') : undefined;
-      console.log('Fetching matches with:', { page, formattedDate, regions }); // Debugging log
       const data = await getMatches(page - 1, formattedDate, regions);
-      console.log('Fetched matches:', data.content); // Debugging log
       setMatches(data.content);
       setTotalPages(data.totalPages);
     } catch (error) {

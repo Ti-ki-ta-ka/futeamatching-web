@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { getMyTeam } from '../api/team';
+import { getOAuthProvider } from '../api/users';
 import { Group, Text, Button, ActionIcon, TextInput, Box, Drawer, Divider, Stack } from '@mantine/core';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext'; 
@@ -10,17 +12,21 @@ import { IconPower,
          IconSwords,
          IconUserCircle,
          IconReport,
-         IconKey
+         IconKey,
+         IconUsers,
+         IconInfoCircle,
+         IconZoomReplace
 } from '@tabler/icons-react';
-
-
-
 
 const HeaderComponent = ({ onSearch, clearSearch }) => {
   const [drawerOpened, setDrawerOpened] = useState(false);
+  const [teamInfoHovered, setTeamInfoHovered] = useState(false); // State to track hover for "내 팀 정보"
+  const [myHovered, setMyHovered] = useState(false); // State to track hover for "My"
   const navigate = useNavigate();
   const { isAuthenticated, logout } = useAuth();
+  const [isSocialLogin, setIsSocialLogin] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [team, setTeam] = useState(null);
 
 
   const toggleDrawer = () => {
@@ -32,7 +38,6 @@ const HeaderComponent = ({ onSearch, clearSearch }) => {
     setSearchQuery(query);
   };
 
-  
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
       onSearch(searchQuery);
@@ -48,6 +53,29 @@ const HeaderComponent = ({ onSearch, clearSearch }) => {
     logout();
     window.location.href = '/login';
   };
+
+  const fetchMyTeam = async () => {
+    try {
+      const data = await getMyTeam();
+      setTeam(data);
+    } catch (error) {
+      console.error('Error fetching team:', error);
+    }
+  };
+
+  const fetchOAuthProvider = async () => {
+    try {
+      const provider = await getOAuthProvider();
+      setIsSocialLogin(provider); // Set true if the user logged in via social login
+    } catch (error) {
+      console.error('Error fetching OAuth provider:', error);
+    }
+  };
+
+  useEffect(() => {
+      fetchMyTeam();  
+      fetchOAuthProvider();
+  }, []);
 
   return (
     <Box
@@ -73,17 +101,17 @@ const HeaderComponent = ({ onSearch, clearSearch }) => {
         </Group>
 
         <Group spacing="xs" justify="flex-end">
-        <Button
-              variant="outline"
-              color="Green"
-              radius="xl"
-              size="md"
-              onClick={handleClearSearch}
-              rightSection={<IconRefresh size={19}/>}
-            >
-              목록 초기화
-            </Button>
-        <TextInput
+          <Button
+            variant="outline"
+            color="Green"
+            radius="xl"
+            size="md"
+            onClick={handleClearSearch}
+            rightSection={<IconRefresh size={19}/>}
+          >
+            목록 초기화
+          </Button>
+          <TextInput
             placeholder="검색하기"
             rightSection={<IconSearch size={20} />}
             radius="xl"
@@ -129,8 +157,6 @@ const HeaderComponent = ({ onSearch, clearSearch }) => {
         </Group>
       </Group>
 
-      
-
       <Drawer
         opened={drawerOpened}
         onClose={toggleDrawer}
@@ -139,9 +165,7 @@ const HeaderComponent = ({ onSearch, clearSearch }) => {
         size="md"
         style={{color:'green'}}
       >
-        <Stack 
-        spacing="sm"
-        >
+        <Stack spacing="sm">
           <Button 
             fullWidth 
             variant="subtle" 
@@ -152,56 +176,122 @@ const HeaderComponent = ({ onSearch, clearSearch }) => {
           >
             홈
           </Button>
-          <Button 
-            fullWidth 
-            variant="subtle" 
-            color="green"
-            onClick={() => navigate('/myteam')}
-            leftSection={<IconSwords size={19}/>}
-            style={{display:'flex', justifyContent:'start'}}
+
+          {/* Hoverable Team Info Button */}
+          <Box
+            onMouseEnter={() => setTeamInfoHovered(true)}
+            onMouseLeave={() => setTeamInfoHovered(false)}
+            sx={{ position: 'relative' }}
           >
-            내 팀 정보
-          </Button>
-          <Button 
-            fullWidth 
-            variant="subtle" 
-            color="green"
-            onClick={() => navigate('/myapplication')}
-            leftSection={<IconSwords size={19}/>}
-            style={{display:'flex', justifyContent:'start'}}
+            <Button 
+              fullWidth 
+              variant="subtle" 
+              color="green"
+              leftSection={<IconUsers size={19}/>}
+              style={{display:'flex', justifyContent:'start'}}
+            >
+              My Team
+            </Button>
+
+            {teamInfoHovered && (
+              <Stack
+                sx={{ 
+                  position: 'absolute', 
+                  top: '100%', 
+                  left: 0, 
+                  zIndex: 1, 
+                  background: 'white',
+                  border: '1px solid #e0e0e0',
+                  borderRadius: '4px',
+                  padding: '8px'
+                }}
+              >
+                <Button 
+                  fullWidth 
+                  variant="subtle" 
+                  color="green"
+                  onClick={() => navigate(team ? '/myteam' : '/noteampage')}
+                  leftSection={<IconInfoCircle size={19}/>}
+                  style={{display:'flex', justifyContent:'start'}}
+                >
+                  내 팀 정보
+                </Button>
+                <Button 
+                  fullWidth 
+                  variant="subtle" 
+                  color="green"
+                  onClick={() => navigate(team ? '/myapplication' : '/noteampage')}
+                  leftSection={<IconSwords size={19}/>}
+                  style={{display:'flex', justifyContent:'start'}}
+                >
+                  우리 팀 매치 신청 내역
+                </Button>
+                <Button 
+                  fullWidth 
+                  variant="subtle" 
+                  color="green"
+                  onClick={() => navigate(team ? '/myteammatches' : '/noteampage')}
+                  leftSection={<IconReport size={19}/>}
+                  style={{display:'flex', justifyContent:'start'}}
+                >
+                  우리 팀 매치 등록 내역
+                </Button>
+              </Stack>
+            )}
+          </Box>
+
+          {/* Hoverable "My" Button */}
+          <Box
+            onMouseEnter={() => setMyHovered(true)}
+            onMouseLeave={() => setMyHovered(false)}
+            sx={{ position: 'relative' }}
           >
-            우리 팀 매치 신청 내역
-          </Button>
-          <Button 
-            fullWidth 
-            variant="subtle" 
-            color="green"
-            onClick={() => navigate('/myteammatches')}
-            leftSection={<IconReport size={19}/>}
-            style={{display:'flex', justifyContent:'start'}}
-          >
-            우리 팀 매치 등록 내역
-          </Button>
-          <Button 
-            fullWidth 
-            variant="subtle" 
-            color="green"
-            onClick={() => navigate('/profile')}
-            leftSection={<IconUserCircle size={19}/>}
-            style={{display:'flex', justifyContent:'start'}}
-          >
-            프로필 변경하기
-          </Button>
-          <Button 
-            fullWidth 
-            variant="subtle" 
-            color="green"
-            onClick={() => navigate('/password')}
-            leftSection={<IconKey size={19}/>}
-            style={{display:'flex', justifyContent:'start'}}
-          >
-            비밀번호 수정하기
-          </Button>
+            <Button 
+              fullWidth 
+              variant="subtle" 
+              color="green"
+              leftSection={<IconUserCircle size={19}/>}
+              style={{display:'flex', justifyContent:'start'}}
+            >
+              My
+            </Button>
+
+            {myHovered && (
+              <Stack
+                sx={{ 
+                  position: 'absolute', 
+                  top: '100%', 
+                  left: 0, 
+                  zIndex: 1, 
+                  background: 'white',
+                  border: '1px solid #e0e0e0',
+                  borderRadius: '4px',
+                  padding: '8px'
+                }}
+              >
+                <Button 
+                  fullWidth 
+                  variant="subtle" 
+                  color="green"
+                  onClick={() => navigate(isSocialLogin === null ? '/profile' : '/social-restricted')}
+                  leftSection={<IconZoomReplace size={19}/>}
+                  style={{display:'flex', justifyContent:'start'}}
+                >
+                  이름 변경
+                </Button>
+                <Button 
+                  fullWidth 
+                  variant="subtle" 
+                  color="green"
+                  onClick={() => navigate(isSocialLogin === null ? '/password' : '/social-restricted')}
+                  leftSection={<IconKey size={19}/>}
+                  style={{display:'flex', justifyContent:'start'}}
+                >
+                  비밀번호 변경
+                </Button>
+              </Stack>
+            )}
+          </Box>
         </Stack>
         <Divider my="lg" />
         {isAuthenticated && (

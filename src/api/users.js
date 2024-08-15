@@ -65,3 +65,8 @@ export const naverSocialLogin = async (code) => {
     return { success: false, message: error.response?.data?.message || error.message };
   }
 };
+
+export const getOAuthProvider = async () => {
+  const response = await client2.get("/users/oauth-provider");
+  return response.data.oauthProvider;
+};

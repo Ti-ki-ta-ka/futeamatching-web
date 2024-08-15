@@ -1,11 +1,12 @@
 import { Button, TextInput, Text, Paper, MultiSelect } from "@mantine/core";
+import { createMatch } from "../api/main";
 import { DateTimePicker } from '@mantine/dates';
 import { useNavigate } from 'react-router-dom';
 import { useState } from "react";
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 
-const MatchCreateInput = ({ createMatch }) => {
+const MatchCreateInput = () => {
   const [title, setTitle] = useState('');
   const [matchDateTime, setMatchDateTime] = useState(null);
   const [region, setRegion] = useState([]);
@@ -30,26 +31,27 @@ const MatchCreateInput = ({ createMatch }) => {
     { value: 'JEJU', label: '제주' }
 ];
 
-  const handleCreateMatch = async (event) => {
-    event.preventDefault();
+const handleCreateMatch = async (event) => {
+  event.preventDefault();
 
-    if (!matchDateTime) {
-      alert('경기 날짜와 시간을 선택해 주세요.');
-      return;
-    }
+  if (!matchDateTime) {
+    alert('경기 날짜와 시간을 선택해 주세요.');
+    return;
+  }
 
-    const formattedDateTime = dayjs(matchDateTime).format('YYYY-MM-DDTHH:mm:ss');
-    const regionsString = region.join(','); 
+  const formattedDateTime = dayjs(matchDateTime).format('YYYY-MM-DDTHH:mm:ss');
+  const regionsString = region.join(','); 
 
-    try {
-      const data = await createMatch({
-        title,
-        matchDate: formattedDateTime,
-        region: regionsString,
-        location,
-        content,
-      });
-      navigate('/main');
+  try {
+    const response = await createMatch({
+      title,
+      matchDate: formattedDateTime,
+      region: regionsString,
+      location,
+      content,
+    });
+
+    if (response.status === 201) {
       alert(`매치가 성공적으로 등록되었습니다!
         
         누구와 붙게 될까요!?
@@ -59,11 +61,21 @@ const MatchCreateInput = ({ createMatch }) => {
         경기 날짜 : ${formattedDateTime}
         지역 : ${regionsString}
         장소 : ${location}
-        `)
-    } catch (error) {
-      console.error("매치 생성 실패", error);
+        `);
+      navigate('/main'); // navigate only after showing the alert
+    } 
+   
+else if(response.status === 500) {
+      throw new Error('매치 생성 실패');
+    } else {
+      throw new Error('매치 생성 실패');
     }
-  };
+  } 
+catch (error) {
+      alert('매치 생성에 실패했습니다. 팀에 소속되어 있지 않다면 생성할 수 없어요!');
+    
+  }
+};
 
   return (
     <form

@@ -1,10 +1,14 @@
 import { Button, TextInput, Paper, Text, MultiSelect } from "@mantine/core";
-import { useState } from "react";
+import { postTeam } from "../api/team"
 
-const CreateTeamInput = ({ createTeam }) => {
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+const CreateTeamInput = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [region, setRegion] = useState([]);
+  const navigate = useNavigate();
     const options = [
         { value: 'SEOUL', label: '서울' },
         { value: 'BUSAN', label: '부산' },
@@ -22,37 +26,36 @@ const CreateTeamInput = ({ createTeam }) => {
         { value: 'JEJU', label: '제주' }
     ]
 
-  const handleCreateTeam = async (event) => {
-    event.preventDefault();
-
-    const regionsString = region.join(','); 
-
-    try {
-      const data = await createTeam({
-        name,
-        description,
-        region: regionsString 
-      });
+    const handleCreateTeam = async (event) => {
+      event.preventDefault();
+      const regionsString = region.join(','); 
     
-      
-      if (data && data.success) {
-        alert(`축하드립니다 팀이 성공적으로 등록되었습니다!
+      try {
+        const response = await postTeam({
+          name,
+          description,
+          region: regionsString,
+        });
     
-        최고의 팀이 되기를 응원합니다!
-    
-        팀 정보
-        팀 이름 : ${name}
-        팀 설명 : ${description}
-        활동 지역 : ${regionsString}
-        `);
-      } else {
-        throw new Error('Unexpected response format');
+        if (response.status === 201) { 
+          alert(`축하드립니다 팀이 성공적으로 등록되었습니다!
+        
+            최고의 팀이 되기를 응원합니다!
+        
+            팀 정보
+            팀 이름 : ${name}
+            팀 설명 : ${description}
+            활동 지역 : ${regionsString}
+            `);
+          navigate('/myteam'); 
+        } else {
+          throw new Error('팀 생성 실패');
+        }
+      } catch (error) {
+        alert('팀 생성에 실패했습니다. 유저는 하나의 팀에 소속될 수 있어요!');
       }
-    } catch (error) {
-      console.error("Create Team failed", error);
-    }
-    
-  };
+    };
+
 
   return (
     <form

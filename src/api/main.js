@@ -25,13 +25,7 @@ export const postMatches = async (matchId) => {
 
 export const createMatch = async (createMatchRequest) => {
   const response = await client.post("/matches/create", createMatchRequest);
-
-  if (response.status === 201) {
-    console.log('매치 생성 성공 : ', response.data);
-  } else {
-    console.log('매치 생성 실패 : ', response.data);
-  }
-  return response.data
+  return response
 };
 
 export const getMyTeamMatches = async (page, matchStatus) => {

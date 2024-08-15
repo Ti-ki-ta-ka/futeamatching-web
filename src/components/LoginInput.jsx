@@ -118,7 +118,8 @@ const LoginInput = ({ getTokens }) => {
         onClick={handleNaverLogin}
         style={{
           backgroundColor:'white',
-          marginTop:'1vh'
+          marginTop:'1vh',
+          display:'none'
         }}
 
           >

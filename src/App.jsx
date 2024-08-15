@@ -22,13 +22,14 @@ import MyTeamPage from './pages/MyTeamPage';
 import MyTeamMemberPage from './pages/MyTeamMemberPage';
 import OAuthKakaoPage from './pages/OAuthKakaoPage';
 import OAuthNaverPage from './pages/OAuthNaverPage';
+import NoTeamPage from './pages/NoTeamPage';
+import SocialRestrictedPage from './components/SocialRestrictedPage';
 
 
 const App = () => {
   useEffect(() => {
     if (!window.Kakao.isInitialized()) {
       window.Kakao.init('4c50edade59f7259c07930d39a810db2');
-      console.log(window.Kakao.isInitialized());
     }
   }, []);
 
@@ -69,6 +70,8 @@ const AppRoutes = () => {
         <Route path="/mymatchapplications/:id" element={<MyMatchApplicationPage />} /> 
         <Route path="/myteam" element={<MyTeamPage />} /> 
         <Route path="/myteammember" element={<MyTeamMemberPage />} />
+        <Route path="/noteampage" element={<NoTeamPage />}/>
+        <Route path="/social-restricted" element={<SocialRestrictedPage/>} />
       </Routes>
     );
 };
