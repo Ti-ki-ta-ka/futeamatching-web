@@ -94,7 +94,10 @@ const HeaderComponent = ({ onSearch, clearSearch }) => {
           <Box
             onClick={() => navigate('/main')}
           >
-            <Text weight={700} size="xl">
+            <Text 
+            weight={700} 
+            size="xl"
+            style={{cursor:'pointer'}}>
               FuTeaMatching ⚽
             </Text>
           </Box>
