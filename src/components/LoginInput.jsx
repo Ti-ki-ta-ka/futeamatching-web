@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 import kakao_login_medium_narrow from '../assets/kakao_login_medium_narrow.png';
 import btnG_naver from '../assets/btnG_naver.png';
+import TermsModal from "./TermsModal";
 
 const LoginInput = ({ getTokens }) => {
   const [email, setEmail] = useState('');
@@ -26,17 +27,17 @@ const LoginInput = ({ getTokens }) => {
   };
 
   const handleKakaoLogin = () => {
-    window.location.href = `https://www.futeamatching.com/api/v2/oauth/kakako`;
+    window.location.href = `http://localhost:8080/api/v2/oauth/kakako`;
   };
 
   const handleNaverLogin = () => {
-    window.location.href = `https://www.futeamatching.com/api/v2/oauth/naver`;
+    window.location.href = `http://localhost:8080/api/v2/oauth/naver`;
   };
 
   useEffect(()=>{
     const naverLogin = new window.naver.LoginWithNaverId({
       clientId: "cAYdVptUCJxBlEfLbcdO", // Replace with your Naver client ID
-      callbackUrl: "https://futeamatching.vercel.app/oauth/naver", // Replace with your Naver callback URL
+      callbackUrl: "http://localhost:5173/oauth/naver", // Replace with your Naver callback URL
       isPopup: false,
       loginButton: { color: "green", type: 3, height: 40 }
     });
@@ -49,7 +50,9 @@ const LoginInput = ({ getTokens }) => {
       style={{
         width: 480,
         margin: "auto",
-        marginTop: 300
+        marginTop: 300,
+        border:'1px solid green',
+        padding:'50px'
       }}
     >
       <Text fw={500} ta="center">FuTeaMatching⚽</Text>
@@ -77,6 +80,8 @@ const LoginInput = ({ getTokens }) => {
       <Button variant="outline" color="green" fullWidth onClick={() => navigate('/signup')} style={{ marginTop: '10px' }}>
         회원가입
       </Button>
+
+      
       
 
       <div
@@ -87,6 +92,48 @@ const LoginInput = ({ getTokens }) => {
         alignItems:'center',
         width:'100%'
       }}>
+        <div
+        style={{
+          display:'flex'
+        }}>
+        <Text
+        style={{
+          fontSize:'0.6vw',
+          margin:'2vh 0.2vw 0vh 0vw'
+        }}>회원 가입 시  </Text>
+        <Text
+         style={{
+          fontSize:'0.6vw',
+          marginTop:'2vh',
+          color:'green'
+        }}>
+        서비스 이용 약관
+        </Text>
+        <Text
+         style={{
+          fontSize:'0.6vw',
+          marginTop:'2vh',
+          margin:'2vh 0.2vw 0vh 0vw'
+        }}>
+        과
+        </Text>
+        <Text
+         style={{
+          fontSize:'0.6vw',
+          marginTop:'2vh',
+          color:'green'
+        }}>
+         개인정보 처리방침
+        </Text>
+        <Text
+         style={{
+          fontSize:'0.6vw',
+          marginTop:'2vh'
+        }}>
+        에 동의하게 됩니다.
+        </Text>
+        </div>
+        
               <div
   style={{
     display: 'flex',
@@ -130,8 +177,8 @@ const LoginInput = ({ getTokens }) => {
       style={{
         backgroundImage: `url(${kakao_login_medium_narrow})`,
         backgroundPosition: 'center',
-        backgroundSize: 'cover',  // Corrected to 'backgroundSize'
-        width: '38.5%',
+        backgroundSize: 'cover',  
+        width: '45%',
         height: '4vh',
         marginTop:'1vh'
       }}
@@ -139,6 +186,7 @@ const LoginInput = ({ getTokens }) => {
     </Button>
 
       </div>
+      <TermsModal/>
       
       
     </form>
