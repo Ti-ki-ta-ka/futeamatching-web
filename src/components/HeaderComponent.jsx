@@ -303,7 +303,7 @@ const HeaderComponent = ({ onSearch, clearSearch }) => {
               fullWidth 
               variant="outline" 
               color="black" 
-              onClick={logout}
+              onClick={handleLogout}
               mt="lg"
             >
               로그아웃

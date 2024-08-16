@@ -9,6 +9,10 @@ const MyTeamMatchList = ({ matches, onDelete }) => {
 
   return (
     <>
+    {matches.length === 0 && 
+      <div>
+        <Text>우리팀이 아직 등록한 매치가 없네요.. 매치를 등록해보세요!</Text>
+      </div>}
       {matches.map((match) => (
         <Card key={match.id} shadow="sm" padding="lg" radius="md" withBorder mb="md">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
