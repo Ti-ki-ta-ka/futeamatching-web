@@ -70,3 +70,9 @@ export const getOAuthProvider = async () => {
   const response = await client2.get("/users/oauth-provider");
   return response.data.oauthProvider;
 };
+
+export const getMyProfile = async () => {
+  const response = await client2.get("/users/my-profile");
+  return response.data;
+};
+

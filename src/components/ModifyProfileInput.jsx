@@ -1,9 +1,10 @@
-import { Button, TextInput, Paper, Image } from "@mantine/core";
-import { useNavigate } from 'react-router-dom';
-import { useState } from "react";
+import { Button, TextInput, Paper, Image, Text } from "@mantine/core";
+import { getMyProfile } from "../api/users";
+import { useEffect, useState } from "react";
 
 const ModifyProfileInput = ({ modifyProfile }) => {
   const [name, setName] = useState('');
+  const [getName, setGetName] = useState('');
 
   const handleModifyProfile = async (event) => {
     event.preventDefault();
@@ -16,6 +17,15 @@ const ModifyProfileInput = ({ modifyProfile }) => {
       console.error("Modify Profile failed", error);
     }
   };
+
+  const fetchMyProfile = async () => {
+    const response = await getMyProfile();
+    setGetName(response.name)
+  }
+
+  useEffect(() => {
+    fetchMyProfile();
+  }, [])
 
   return (
     <form
@@ -36,6 +46,7 @@ const ModifyProfileInput = ({ modifyProfile }) => {
           mb="xl" 
         />
       <Paper shadow="xs" padding="md" withBorder style={{ marginTop: '150px', padding: '20px' }}>
+        <Text>현재 이름 : {getName} </Text>
 
         <TextInput
           label="Name"

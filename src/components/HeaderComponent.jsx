@@ -66,7 +66,7 @@ const HeaderComponent = ({ onSearch, clearSearch }) => {
   const fetchOAuthProvider = async () => {
     try {
       const provider = await getOAuthProvider();
-      setIsSocialLogin(provider); // Set true if the user logged in via social login
+      setIsSocialLogin(provider); 
     } catch (error) {
       console.error('Error fetching OAuth provider:', error);
     }
