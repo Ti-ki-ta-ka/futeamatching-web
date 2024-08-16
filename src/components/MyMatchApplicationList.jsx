@@ -14,6 +14,10 @@ const MyMatchApplicationList = ({ applications, matchId, onApplicationReplied })
 
     return (
         <>
+        {applications.length === 0 && 
+      <div>
+        <Text>아직 이 매치에 신청한 팀이 없어요! 조금 더 기다려볼까요?</Text>
+      </div>}
             {applications.map((application) => (
                 <Card key={application.id} shadow="sm" padding="lg" radius="md" withBorder mb="md">
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>

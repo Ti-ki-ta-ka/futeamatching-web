@@ -4,6 +4,12 @@ import { Card, Group, Text, Badge, SimpleGrid } from '@mantine/core';
 const MyApplicationComponent = ({ applications }) => {
   return (
     <>
+    <Text fw={500} ta="center" mb="md">매치 신청 내역 ⚽</Text>
+    {applications.length === 0 && 
+      <div>
+        <Text>우리팀이 아직 다른 매치에 신청한 내역이 없어요! 다른 매치들도 살펴볼까요?</Text>
+      </div>
+      }
       <form
         style={{
           width: '90%',
@@ -11,11 +17,12 @@ const MyApplicationComponent = ({ applications }) => {
           marginTop: 100
         }}
       >
-        <Text fw={500} ta="center" mb="md">매치 신청 내역 ⚽</Text>
+        
         <SimpleGrid cols={3} spacing="lg" breakpoints={[
           { maxWidth: 'sm', cols: 1 }
         ]}>
           {applications.map((application) => (
+            
             <Card key={application.id} shadow="sm" padding="lg" radius="md" withBorder mb="md">
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Group>
