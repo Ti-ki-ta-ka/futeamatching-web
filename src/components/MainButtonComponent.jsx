@@ -4,7 +4,9 @@ import { IconSoccerField } from '@tabler/icons-react';
 import { IconUsers,
          IconList,
          IconSwords,
-         IconSquareRoundedPlus
+         IconSquareRoundedPlus,
+         IconMedal,
+         IconUserPlus
  } from '@tabler/icons-react';
 
 
@@ -49,6 +51,16 @@ const MainButtonComponent = () => {
                 <Menu.Label >이젠 나도 구단주!</Menu.Label>
                 <Menu.Item color="green" leftSection={<IconSquareRoundedPlus style={{ width: rem(14), height: rem(14) }} />} onClick={() => navigate('/team/create')}>
                 팀 생성
+                </Menu.Item>
+
+                <Menu.Label >함께 하고 싶은 팀을 찾아보자!</Menu.Label>
+                <Menu.Item color="green" leftSection={<IconUserPlus style={{ width: rem(14), height: rem(14) }} />} onClick={() => navigate('/recruitments')}>
+                구인 게시판
+                </Menu.Item>
+
+                <Menu.Label >최고의 팀은 어디일까?</Menu.Label>
+                <Menu.Item color="green" leftSection={<IconMedal style={{ width: rem(14), height: rem(14) }} />} onClick={() => navigate('/ranking')}>
+                팀 파워 랭킹
                 </Menu.Item>
                 
             </Menu.Dropdown>

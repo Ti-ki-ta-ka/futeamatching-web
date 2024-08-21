@@ -93,9 +93,9 @@ const MyTeam = ({ team }) => {
         size="md"
         variant="default"
         style={{ backgroundColor: '#40C057' }}
-        onClick={() => navigate('/myteammember')}
+        onClick={() => navigate('/create-recruitment')}
       >
-        멤버 보기
+        멤버 구인 공고 등록
       </Button>
     </Card>
   );

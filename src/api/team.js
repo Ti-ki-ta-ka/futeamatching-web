@@ -31,7 +31,19 @@ export const postTeam = async(createTeamRequest) => {
         sort_direction: 'desc'
       },
     });
-  
+    return response.data;
+  };
+
+  export const getTeamsForRanking = async (page, region) => {
+    const response = await client.get('/teams', {
+      params: {
+        region: region || null,  // If region is an empty string, it passes null.
+        page: page >= 0 ? page : 0,
+        size: 5,
+        sort_by: 'tierScore',  // Sorting by skill score for rankings
+        sort_direction: 'desc'
+      },
+    });
     return response.data;
   };
 
