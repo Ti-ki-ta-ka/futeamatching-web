@@ -24,6 +24,11 @@ import OAuthKakaoPage from './pages/OAuthKakaoPage';
 import OAuthNaverPage from './pages/OAuthNaverPage';
 import NoTeamPage from './pages/NoTeamPage';
 import SocialRestrictedPage from './components/SocialRestrictedPage';
+import RecruitmentPage from './pages/RecruitmentPage';
+import RankingPage from './pages/RankingPage';
+import CreateRecruitmentPage from './pages/CreateRecruitmentPage';
+import MyTeamRecruitmentApplicationPage from './pages/MyTeamRecruitmentApplicationPage';
+import MyTeamRecruitmentPage from './pages/MyTeamRecruitmentPage';
 
 
 const App = () => {
@@ -72,6 +77,11 @@ const AppRoutes = () => {
         <Route path="/myteammember" element={<MyTeamMemberPage />} />
         <Route path="/noteampage" element={<NoTeamPage />}/>
         <Route path="/social-restricted" element={<SocialRestrictedPage/>} />
+        <Route path="/recruitments" element={<RecruitmentPage />} />
+        <Route path="/ranking" element={<RankingPage />} />
+        <Route path="/create-recruitment" element={<CreateRecruitmentPage/>} />
+        <Route path="/myteamrecruitments" element={<MyTeamRecruitmentPage/>} />
+        <Route path="/myteamrecruitmentapplication/:id" element={<MyTeamRecruitmentApplicationPage/>} />
       </Routes>
     );
 };

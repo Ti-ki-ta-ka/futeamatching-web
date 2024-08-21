@@ -10,7 +10,8 @@ const RecruitmentList = () => {
 
   const handlePostRecruitment = async () => {
     try {
-      const data = await postRecruitmentApplication(selectedRecruitment.id);
+      console.log("Selected Recruitment ID:", selectedRecruitment.recruitmentId);
+      const data = await postRecruitmentApplication(selectedRecruitment.recruitmentId);
       if (data.status === 201) {
         alert("신청 되었습니다.");
         setOpened(false);
@@ -18,12 +19,18 @@ const RecruitmentList = () => {
         throw new Error('신청 실패');
       }
     } catch (error) {
-      alert("신청이 실패했습니다. 나중에 다시 시도해주세요");
+      if (error.response) {
+        console.error('Error Response:', error.response.data);  // Log the error response
+        alert(`Error: ${error.response.data.message}`);
+      } else {
+        alert("신청이 실패했습니다. 나중에 다시 시도해주세요");
+      }
       setOpened(false);
     }
   };
 
   const openModal = (recruitment) => {
+    console.log("Selected Recruitment:", recruitment); // Add this line
     setSelectedRecruitment(recruitment);
     setOpened(true);
   };

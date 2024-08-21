@@ -18,7 +18,7 @@ import { IconPower,
          IconZoomReplace
 } from '@tabler/icons-react';
 
-const HeaderComponent = ({ onSearch, clearSearch }) => {
+const HeaderComponent = ({ onSearch, clearSearch, openSearch }) => {
   const [drawerOpened, setDrawerOpened] = useState(false);
   const [teamInfoHovered, setTeamInfoHovered] = useState(false); // State to track hover for "내 팀 정보"
   const [myHovered, setMyHovered] = useState(false); // State to track hover for "My"
@@ -27,6 +27,11 @@ const HeaderComponent = ({ onSearch, clearSearch }) => {
   const [isSocialLogin, setIsSocialLogin] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [team, setTeam] = useState(null);
+  const [isSearchStatus, setIsSearchStatus] = useState(true);
+
+  const handleSearchStatus = () => {
+    setIsSearchStatus(openSearch)
+  }
 
 
   const toggleDrawer = () => {
@@ -75,6 +80,7 @@ const HeaderComponent = ({ onSearch, clearSearch }) => {
   useEffect(() => {
       fetchMyTeam();  
       fetchOAuthProvider();
+      handleSearchStatus();
   }, []);
 
   return (
@@ -124,6 +130,7 @@ const HeaderComponent = ({ onSearch, clearSearch }) => {
             value={searchQuery}
             onChange={handleInputChange}
             onKeyDown={handleKeyDown}
+            disabled={isSearchStatus}
           />
           {isAuthenticated ? (
             <Button
@@ -238,6 +245,16 @@ const HeaderComponent = ({ onSearch, clearSearch }) => {
                   style={{display:'flex', justifyContent:'start'}}
                 >
                   우리 팀 매치 등록 내역
+                </Button>
+                <Button 
+                  fullWidth 
+                  variant="subtle" 
+                  color="green"
+                  onClick={() => navigate(team ? '/myteamrecruitments' : '/noteampage')}
+                  leftSection={<IconReport size={19}/>}
+                  style={{display:'flex', justifyContent:'start'}}
+                >
+                  우리 팀 구인 공고 내역
                 </Button>
               </Stack>
             )}

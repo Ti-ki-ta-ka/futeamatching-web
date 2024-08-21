@@ -50,7 +50,16 @@ const TeamDetail = ({ team }) => {
       </Group>
       
       
-      <Button fullWidth radius="md" mt="xl" size="md" variant="default" style={{backgroundColor:'#40C057', cursor:'not-allowed'}}>
+      <Button 
+      fullWidth 
+      radius="md" 
+      mt="xl"
+      size="md" 
+      variant="default" 
+      style={{
+        backgroundColor:'#40C057', 
+        cursor:'not-allowed'
+        }}>
         팀 즐겨찾기
       </Button>
     </Card>

@@ -28,42 +28,49 @@ const CreateRecruitmentInput = () => {
 
     const handleCreateRecuitment = async (event) => {
       event.preventDefault();
-      const regionsString = region.join(','); 
+      if (
+        quantity.length < 1 ||
+        quantity.length > 30||
+        !/^(?:[1-9]|[1-4][0-9]|50)$/.test(quantity.toString())
+      ) {
+        alert("현재팀에는 30명 까지만 구인이 가능하네요");
+        return;
+      }
+      if (
+        content.length < 2 ||
+        content.length > 30
+      ) {
+        alert("설명은 2~30자로 설정해주세요.");
+        return;
+      }
     
       try {
         const response = await postRecruitment({
           quantity,
           content,
-          recruitType: regionsString,
+          recruitType: 'TEAM_MEMBER',
         });
     
         if (response.status === 201) { 
-          alert(`축하드립니다 팀이 성공적으로 등록되었습니다!
+          alert(`축하드립니다 구인 내용이 성공적으로 등록되었습니다!
         
-            최고의 팀이 되기를 응원합니다!
+            좋은 멤버 영입을 기원합니다!
         
-            팀 정보
-            팀 이름 : ${quantity}
-            팀 설명 : ${content}
-            활동 지역 : ${recruitType}
+            구인 정보
+            구인 수 : ${quantity}
+            설명 : ${content}
+            구인 유형 : ${recruitType}
             `);
           navigate('/myteam'); 
         } else {
-          throw new Error('팀 생성 실패');
+          throw new Error('구인 등록 실패');
         }
       } catch (error) {
-        alert('팀 생성에 실패했습니다. 유저는 하나의 팀에 소속될 수 있어요!');
+        alert('구인 등록에 실패했습니다.');
       }
     };
 
-    if (
-      content.length < 2 ||
-      content.length > 12 ||
-      !/^[가-힣a-zA-Z0-9]+$/.test(content)
-    ) {
-      alert("닉네임은 2~12자의 한글, 영문, 숫자로 설정해주세요.");
-      return;
-    }
+    
 
 
   return (
@@ -78,8 +85,8 @@ const CreateRecruitmentInput = () => {
       <Text fw={500} ta="center">FuTeaMatching⚽</Text>
       <Paper shadow="xs" padding="md" withBorder style={{ marginTop: '10px', padding: '20px' }}>
         <TextInput
-          label="늘 고민이 되는"
-          placeholder="팀 이름"
+          label="몇명을 영입할까요?"
+          placeholder="구인 인원수"
           value={quantity}
           onChange={(e) => setQuantity(e.target.value)}
           required
@@ -87,7 +94,7 @@ const CreateRecruitmentInput = () => {
         />
 
         <TextInput
-          label="이런 팀이에요"
+          label="구단의 한마디"
           placeholder="설명"
           value={content}
           onChange={(e) => setContent(e.target.value)}
@@ -96,12 +103,13 @@ const CreateRecruitmentInput = () => {
         />
 
         <MultiSelect
-          label="활동하는 지역은요"
-          placeholder="지역"
+          label="어떤 유형의 멤버를 영입할까요?"
+          placeholder="지금은 일반 멤버만 영입 가능합니다."
           data={options}
           value={recruitType}
           onChange={setRecruitType}
           maxValues={1}
+          disabled='true'
           mb="md"
         />
 
@@ -112,7 +120,7 @@ const CreateRecruitmentInput = () => {
           fullWidth
           style={{ marginBottom: '20px' }}
         >
-          팀 생성
+          구인 공고 등록
         </Button>
       </Paper>
     </form>
