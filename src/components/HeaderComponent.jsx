@@ -200,7 +200,7 @@ const HeaderComponent = ({ onSearch, clearSearch, openSearch }) => {
               leftSection={<IconUsers size={19}/>}
               style={{display:'flex', justifyContent:'start'}}
             >
-              My Team
+              내 팀
             </Button>
 
             {teamInfoHovered && (
@@ -273,7 +273,7 @@ const HeaderComponent = ({ onSearch, clearSearch, openSearch }) => {
               leftSection={<IconUserCircle size={19}/>}
               style={{display:'flex', justifyContent:'start'}}
             >
-              My
+              내 정보 변경
             </Button>
 
             {myHovered && (

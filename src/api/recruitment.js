@@ -74,23 +74,13 @@ export const getMyTeamRecruitments = async (page) => {
 
 export const replyRecruitmentApplication = async (recruitmentId, applicationId, approveStatus) => {
   try {
-      console.log('API Call - Recruitment ID:', recruitmentId);  // Log the recruitment ID
-      console.log('API Call - Application ID:', applicationId);  // Log the application ID
-      console.log('API Call - Approve Status:', approveStatus);  // Log the approve status being sent
-
       const response = await client2.patch(`/leader/recruitments/${recruitmentId}/recruitment-applications/${applicationId}`, {
-          responseStatus: approveStatus
+          responseStatus: approveStatus // Pass as a plain string
       });
-
-      console.log('API Response:', response);  // Log the entire response from the server
       return response.data;
   } catch (error) {
-      console.error('Error updating recruitment application:', error);
-      if (error.response) {
-          console.error('Error Response Data:', error.response.data);  // Log the response data from the error
-          console.error('Error Response Status:', error.response.status);  // Log the status code from the error
-      }
-      throw error; 
+      console.log(error)
+      throw error;
   }
 };
 

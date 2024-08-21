@@ -12,7 +12,6 @@ const ModifyPasswordContainer = () => {
       navigate('/main');
     } catch (error) {
       console.error('비밀번호 변경 실패:', error.response?.data?.message);
-      alert(error.response?.data?.message); 
     }
   };
 

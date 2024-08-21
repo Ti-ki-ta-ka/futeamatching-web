@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Group, Text, Badge, Button } from '@mantine/core';
 import { replyMatchApplication } from '../api/matchapplication';
+import { translateApproveStatus } from '../api/translations';
 
 const MyMatchApplicationList = ({ applications, matchId, onApplicationReplied }) => {
     const handleReply = async (applicationId, approveStatus) => {
@@ -27,7 +28,7 @@ const MyMatchApplicationList = ({ applications, matchId, onApplicationReplied })
                             </Badge>
                         </Group>
                         <Badge color="green" variant="light">
-                            상태: {application.approveStatus}
+                            상태: {translateApproveStatus(application.approveStatus)}
                         </Badge>
                     </div>
                     <Text size="md" style={{ marginTop: '10px' }}>

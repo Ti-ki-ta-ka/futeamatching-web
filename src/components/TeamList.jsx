@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Group, Text, Badge, Box } from '@mantine/core';
 import { useNavigate } from 'react-router-dom';
+import { translateRegion } from '../api/translations';
 
 const TeamList = ({ teams }) => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ const TeamList = ({ teams }) => {
                 {team.name}
               </Text>
               <Badge color="green" variant="light">
-                {team.region}
+                {translateRegion(team.region)}
               </Badge>
             </Group>
       

@@ -44,7 +44,7 @@ const ModifyPasswordInput = ({ modifyPassword }) => {
       <Paper shadow="xs" padding="md" withBorder style={{ marginTop: '150px', padding: '20px' }}>
 
       <TextInput
-        label="Password"
+        label="바꿀 비밀번호를 입력해주세요!"
         placeholder="비밀번호"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
@@ -53,7 +53,7 @@ const ModifyPasswordInput = ({ modifyPassword }) => {
       />
 
         <TextInput
-        label="Confirm Password"
+        label="한번 더 입력해주세요!"
         placeholder="비밀번호 확인"
         value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value)}

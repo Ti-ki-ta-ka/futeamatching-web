@@ -52,7 +52,8 @@ const CreateTeamInput = () => {
           throw new Error('팀 생성 실패');
         }
       } catch (error) {
-        alert('팀 생성에 실패했습니다. 유저는 하나의 팀에 소속될 수 있어요!');
+        alert(`팀 생성에 실패했습니다.
+          (이미 소속팀이 있으시거나 중복된 팀이름일 수 있습니다.)`);
       }
     };
 

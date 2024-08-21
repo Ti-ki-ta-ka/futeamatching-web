@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, Group, Text, Badge, SimpleGrid } from '@mantine/core';
+import { translateApproveStatus, translateRegion } from '../api/translations';
 
 const MyApplicationComponent = ({ applications }) => {
   return (
@@ -30,10 +31,10 @@ const MyApplicationComponent = ({ applications }) => {
                     {application.matchPost.title}
                   </Text>
                   <Badge color="green" variant="light">
-                    {application.approveStatus}
+                    {translateApproveStatus(application.approveStatus)}
                   </Badge>
                   <Badge color="blue" variant="light">
-                    {application.matchPost.region}
+                    {translateRegion(application.matchPost.region)}
                   </Badge>
                 </Group>
               </div>

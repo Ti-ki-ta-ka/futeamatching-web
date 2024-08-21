@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Group, Text, Badge, Grid, Box } from '@mantine/core';
 import { useNavigate } from 'react-router-dom';
+import { translateRegion } from '../api/translations';
 
 const RankingList = ({ teams, page, itemsPerPage }) => {
   const navigate = useNavigate();
@@ -85,7 +86,7 @@ const RankingList = ({ teams, page, itemsPerPage }) => {
               </Grid.Col>
               <Grid.Col span={2.7}>
                 <Badge color="green" variant="light">
-                  {team.region}
+                  {translateRegion(team.region)}
                 </Badge>
               </Grid.Col>
               <Grid.Col span={2.4}>

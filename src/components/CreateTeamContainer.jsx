@@ -4,8 +4,6 @@ import MainButtonComponent from './MainButtonComponent';
 
 const CreateTeamContainer = () => {
 
-
-
   return (
     <div style={{ padding: '0 250px' }}>
         <HeaderComponent />

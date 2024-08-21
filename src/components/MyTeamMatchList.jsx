@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Card, Group, Text, Badge, Box, Button } from '@mantine/core';
 import { useNavigate } from 'react-router-dom';
+import { translateRegion } from '../api/translations';
 
 
 const MyTeamMatchList = ({ matches, onDelete }) => {
@@ -21,7 +22,7 @@ const MyTeamMatchList = ({ matches, onDelete }) => {
                 {match.title}
               </Text>
               <Badge color="green" variant="light">
-                {match.region}
+                {translateRegion(match.region)}
               </Badge>
             </Group>
           </div>

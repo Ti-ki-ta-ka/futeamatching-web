@@ -8,11 +8,20 @@ const ModifyProfileInput = ({ modifyProfile }) => {
 
   const handleModifyProfile = async (event) => {
     event.preventDefault();
+    if (
+      name.length < 2 ||
+      name.length > 12 ||
+      !/^[가-힣a-zA-Z0-9]+$/.test(name)
+    ) {
+      alert("닉네임은 2~12자의 한글, 영문, 숫자로 설정해주세요.");
+      return;
+    }
 
     try {
       const data = await modifyProfile({
         name
       });
+      
     } catch (error) {
       console.error("Modify Profile failed", error);
     }
@@ -49,7 +58,6 @@ const ModifyProfileInput = ({ modifyProfile }) => {
         <Text>현재 이름 : {getName} </Text>
 
         <TextInput
-          label="Name"
           placeholder="이름"
           value={name}
           onChange={(e) => setName(e.target.value)}

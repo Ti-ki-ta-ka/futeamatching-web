@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState }  from 'react';
 import { Card, Group, Text, Badge, Button } from '@mantine/core';
 import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
+import {translateRegion} from '../api/translations'
 
 const MainList = ({ matches }) => {
   const navigate = useNavigate();
+  const [isButtonStatus, setIsButtonStatus] = useState(false);
 
   const handleCardClick = (match) => {
     navigate(`/match/${match.id}`, { state: match });
@@ -18,14 +20,12 @@ const MainList = ({ matches }) => {
     const now = dayjs();
     const matchDay = dayjs(matchDate);
 
-    if (matchDay.isBefore(now, 'seconds')) {
-      return { label: "마감", color: "gray" };
-    } else if (matchStatus) {
-      return { label: "마감", color: "gray" };
-    } else if (matchDay.diff(now, 'day') < 2 ) {
-      return { label: "마감 임박", color: "red" };
-    }else {
-      return { label: "신청 가능", color: "green" };
+    if (matchDay.isBefore(now, 'seconds') || matchStatus) {
+      return { label: "마감", color: "gray", disabled: true };
+    } else if (matchDay.diff(now, 'day') < 2) {
+      return { label: "마감 임박", color: "red", disabled: false };
+    } else {
+      return { label: "신청 가능", color: "green", disabled: false };
     }
   };
 
@@ -41,7 +41,7 @@ const MainList = ({ matches }) => {
         </Button>
       </div>}
       {matches.map((match) => {
-        const { label, color } = getButtonProps(match.matchDate, match.matchStatus);
+        const { label, color, disabled  } = getButtonProps(match.matchDate, match.matchStatus);
         return (
         <Card 
           key={match.id} 
@@ -59,7 +59,7 @@ const MainList = ({ matches }) => {
                 {match.title}
               </Text>
               <Badge color="green" variant="light">
-                {match.region}
+              {translateRegion(match.region)}
               </Badge>
             </Group>
           </div>
@@ -67,7 +67,11 @@ const MainList = ({ matches }) => {
             {match.content}
           </Text>
           <div style={{ textAlign: 'right' }}>
-            <Button style={{marginBottom:'10px'}}color={color}>{label}</Button>
+            <Button 
+            style={{marginBottom:'10px'}}
+            color={color}
+            disabled={disabled}
+            >{label}</Button>
             <Text size="sm" color="dimmed">경기 날짜</Text>
             <Text size="sm" color="dimmed">
               {new Date(match.matchDate).toLocaleString()}

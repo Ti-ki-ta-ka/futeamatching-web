@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Group, Text, Badge, Button } from '@mantine/core';
 import { replyRecruitmentApplication } from '../api/recruitment';  // Assuming you have this API set up
+import { translateApproveStatus } from '../api/translations';
 
 const RecruitmentApplicationList = ({ recruitmentId, applications, onApplicationReplied }) => {
     const handleReply = async (applicationId, approveStatus) => {
@@ -8,7 +9,7 @@ const RecruitmentApplicationList = ({ recruitmentId, applications, onApplication
         console.log('Application ID:', applicationId);  // Log the application ID
         console.log('Approve Status:', approveStatus);  // Log the approve status
         try {
-            const response = await replyRecruitmentApplication(recruitmentId,applicationId, { approveStatus });
+            const response = await replyRecruitmentApplication(recruitmentId,applicationId, { approveStatus }.approveStatus);
             console.log('Response from Server:', response);
             onApplicationReplied();
             if(response.staus === 201 && approveStatus === 'APPROVE'){
@@ -42,7 +43,7 @@ const RecruitmentApplicationList = ({ recruitmentId, applications, onApplication
                             </Badge>
                         </Group>
                         <Badge color="green" variant="light">
-                            신청 상태 : {application.responseStatus}
+                            신청 상태 : {translateApproveStatus(application.responseStatus)}
                         </Badge>
                     </div>
                     <Text size="md" style={{ marginTop: '10px' }}>

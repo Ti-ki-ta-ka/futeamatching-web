@@ -19,10 +19,20 @@ const MatchDetailsContainer = () => {
     try {
       const data = await postMatches(matchId);
       navigate('/main');
-      console.log("Match application successful", data);
+      alert(`축하드립니다 매치가 성공적으로 신청되었습니다!
+        
+        매치가 성사되기를 바랍니다!
+    
+        매치 정보
+        매치 날짜 : ${data.matchPost.matchDate}
+        상대 활동 지역 : ${data.matchPost.region}
+        매치 상세 지역 : ${data.matchPost.location}
+        
+        `);
     } catch (error) {
-      console.error("Apply match failed", error);
-      alert(error.response?.data?.message); 
+      alert(`매치 신청에 실패했습니다. 나중에 다시 시도해주세요
+        (팀이 없거나 동일한 날의 2개이상의 매치신청
+        혹은 본인 팀의 매치에 신청한건 아닌지 확인해주세요!)`); 
     }
   };
 

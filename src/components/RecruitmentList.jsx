@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Card, Group, Text, Badge, Button, Modal } from '@mantine/core';
 import { getRecruitments } from '../api/recruitment';
 import { postRecruitmentApplication } from '../api/recruitment';
+import { translateRegion } from '../api/translations';
 
 const RecruitmentList = () => {
   const [recruitments, setRecruitments] = useState([]);
@@ -20,8 +21,7 @@ const RecruitmentList = () => {
       }
     } catch (error) {
       if (error.response) {
-        console.error('Error Response:', error.response.data);  // Log the error response
-        alert(`Error: ${error.response.data.message}`);
+        console.error('Error Response:', error.response.data);
       } else {
         alert("신청이 실패했습니다. 나중에 다시 시도해주세요");
       }
@@ -70,7 +70,7 @@ const RecruitmentList = () => {
                   {recruitment.team.name}
                 </Text>
                 <Badge color="green" variant="light">
-                  {recruitment.team.region}
+                  {translateRegion(recruitment.team.region)}
                 </Badge>
               </Group>
               <Text size="md">팀 멤버 수 : {recruitment.team.numMember} / 50</Text>
